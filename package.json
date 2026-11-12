@@ -14,7 +14,8 @@
     "release": "tsx scripts/release.ts",
     "test": "vitest run",
     "typecheck": "tsc -p .",
-    "check": "pnpm typecheck && pnpm test"
+    "check": "pnpm typecheck && pnpm test",
+    "showcase": "tsx scripts/showcase.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

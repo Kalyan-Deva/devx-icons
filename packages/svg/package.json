@@ -3,7 +3,30 @@
   "version": "1.0.0",
   "description": "6,000+ precision line and solid SVG icons with a built-in accent colour. 24px grid, 1.75 stroke.",
   "license": "MIT",
-  "files": ["line", "solid", "sprite", "icons.json"],
-  "keywords": ["icons", "svg", "icon-set", "line-icons", "solid-icons", "sprite", "devx"],
-  "sideEffects": false
+  "files": [
+    "line",
+    "solid",
+    "sprite",
+    "icons.json"
+  ],
+  "keywords": [
+    "icons",
+    "svg",
+    "icon-set",
+    "line-icons",
+    "solid-icons",
+    "sprite",
+    "devx"
+  ],
+  "sideEffects": false,
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/svg"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  }
 }

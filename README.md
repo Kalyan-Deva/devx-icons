@@ -2,6 +2,25 @@
 
 **6,354 open-source icons in line and solid, with a signature accent colour.**
 
+[![Download](https://img.shields.io/github/v/release/Kalyan-Deva/devx-icons?label=download&color=ff5a1f)](https://github.com/Kalyan-Deva/devx-icons/releases/latest)
+![Icons](https://img.shields.io/badge/icons-6%2C354-111111)
+![License](https://img.shields.io/badge/license-MIT-111111)
+
+![DevX Icons, line style](docs/images/showcase-line.png)
+![DevX Icons, solid style](docs/images/showcase-solid.png)
+
+## Download
+
+Grab a ready-made pack from the [latest release](https://github.com/Kalyan-Deva/devx-icons/releases/latest):
+
+| Pack | What's inside |
+|---|---|
+| `devx-icons-1.0.0-svg.zip` | every icon as SVG (`line/` + `solid/`), two SVG sprites, `icons.json` |
+| `devx-icons-1.0.0-font.zip` | icon fonts (woff2 + ttf, line + solid) and `devx-icons.css` |
+| `devx-icons-1.0.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128 and 256 px, line + solid |
+| `devx-icons-1.0.0-ico.zip` | one multi-size `.ico` per icon (16 to 256 px), line + solid |
+| `devx-icons-*.tgz` | the npm packages (`devx-icons`, `@devx-icons/font`, `@devx-icons/react`) |
+
 - 24 × 24 grid, 2 px padding, 1.75 stroke, round caps and joins, ~3 px corner radius
 - **Accent element:** every multi-part icon has one detail drawn in `var(--devx-accent)`,
   falling back to `currentColor` — set one CSS variable and every icon gets a second colour
@@ -12,6 +31,9 @@
 - MIT licensed
 
 ## Icons
+
+![One base icon with its sixteen variants, line](docs/images/variants-line.png)
+![One base icon with its sixteen variants, solid](docs/images/variants-solid.png)
 
 521 hand-drawn base icons × systematic variants (`-plus`, `-minus`, `-check`, `-x`,
 `-alert`, `-clock`, `-lock`, `-search`, `-star`, `-heart`, `-upload`, `-download`,
@@ -33,6 +55,14 @@
 Browse them: `pnpm dev` → http://localhost:3100 (search, line/solid, size, stroke, ink and accent colour, click to copy).
 
 ## Use
+
+Until the packages are on the npm registry, install them straight from the release:
+
+```bash
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-react-1.0.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-1.0.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-font-1.0.0.tgz
+```
 
 ### React — `@devx-icons/react`
 

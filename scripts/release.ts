@@ -28,7 +28,7 @@ rmSync(stage, { recursive: true, force: true });
 const docs = (dir: string, what: string) => {
   mkdirSync(dir, { recursive: true });
   cpSync(`${root}/LICENSE`, `${dir}/LICENSE`);
-  writeFileSync(`${dir}/README.txt`, `DevX Icons ${v} — ${what}\nhttps://github.com/devx-icons\nMIT licensed. See LICENSE.\n`);
+  writeFileSync(`${dir}/README.txt`, `DevX Icons ${v} — ${what}\nhttps://github.com/Kalyan-Deva/devx-icons\nMIT licensed. See LICENSE.\n`);
 };
 
 console.log("packing release…");

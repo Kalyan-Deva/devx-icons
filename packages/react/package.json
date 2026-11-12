@@ -8,12 +8,41 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./icons/*": { "types": "./dist/icons/*.d.ts", "import": "./dist/icons/*.js" },
-    "./meta": { "types": "./dist/meta.d.ts", "import": "./dist/meta.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    },
+    "./meta": {
+      "types": "./dist/meta.d.ts",
+      "import": "./dist/meta.js"
+    }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
-  "peerDependencies": { "react": ">=17" },
-  "keywords": ["icons", "react", "svg", "react-icons", "devx"]
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "keywords": [
+    "icons",
+    "react",
+    "svg",
+    "react-icons",
+    "devx"
+  ],
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/react"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  }
 }

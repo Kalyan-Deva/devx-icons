@@ -4,6 +4,26 @@
   "description": "DevX Icons as a web font (line + solid) with the built-in accent colour.",
   "license": "MIT",
   "style": "devx-icons.css",
-  "files": ["fonts", "devx-icons.css", "codepoints.json"],
-  "keywords": ["icons", "icon-font", "webfont", "woff2", "devx"]
+  "files": [
+    "fonts",
+    "devx-icons.css",
+    "codepoints.json"
+  ],
+  "keywords": [
+    "icons",
+    "icon-font",
+    "webfont",
+    "woff2",
+    "devx"
+  ],
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/font"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  }
 }

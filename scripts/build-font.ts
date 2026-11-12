@@ -95,7 +95,7 @@ async function buildFont(style: "line" | "solid", family: string, file: string) 
     `<?xml version="1.0" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg"><defs>` +
     `<font id="${file}" horiz-adv-x="${UPM}"><font-face font-family="${family}" units-per-em="${UPM}" ascent="${UPM}" descent="0"/>` +
     `<missing-glyph horiz-adv-x="${UPM}"/>${glyphs.join("")}</font></defs></svg>`;
-  const ttf = Buffer.from(svg2ttf(svgFont, { copyright: "DevX Icons — MIT License", description: `${family} ${VERSION}`, url: "https://github.com/devx-icons", version: `Version ${VERSION.split(".").slice(0, 2).join(".")}` }).buffer);
+  const ttf = Buffer.from(svg2ttf(svgFont, { copyright: "DevX Icons — MIT License", description: `${family} ${VERSION}`, url: "https://github.com/Kalyan-Deva/devx-icons", version: `Version ${VERSION.split(".").slice(0, 2).join(".")}` }).buffer);
   const woff2 = Buffer.from(await wawoff2.compress(ttf));
   writeFileSync(new URL(`packages/font/fonts/${file}.ttf`, ROOT), ttf);
   writeFileSync(new URL(`packages/font/fonts/${file}.woff2`, ROOT), woff2);
