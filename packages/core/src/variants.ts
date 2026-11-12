@@ -2,11 +2,18 @@
 // (GAP) into the base icon — the DevX "open gap" signature, applied by rule.
 
 import { parsePath, type Pt } from "./path.js";
-import { cut, distToSegment, runsToD } from "./geom.js";
+import { cut, distToSegment, openLoopD, runsToD } from "./geom.js";
 import { C, G, R, star, type Part } from "./dsl.js";
 
 export const STROKE = 1.75;
 export const GAP = 1.25; // visible gap between a badge and the base, edge to edge
+/** Open loop: visible gap (edge to edge) where every closed outline opens at 1 o'clock. */
+export const LOOP_GAP = 1.5;
+
+/** Apply the open-loop signature to stroked parts (filled accent dots stay as they are). */
+export function openLoopParts(parts: Part[]): Part[] {
+  return parts.map((p) => (p.role === "accent-fill" ? p : { ...p, d: openLoopD(p.d, LOOP_GAP + STROKE) }));
+}
 
 export type CutShape =
   | { kind: "circle"; cx: number; cy: number; r: number } // r = badge extent (glyph edge from centre)
@@ -116,7 +123,8 @@ export function expand(bases: BaseIcon[]): IconDef[] {
   };
   for (const b of bases) {
     const common = { baseParts: b.parts, solidFill: b.solidFill ?? [] };
-    push({ name: b.name, base: b.name, variant: null, category: b.category, tags: b.tags, parts: b.parts, ...common });
+    const open = openLoopParts(b.parts);
+    push({ name: b.name, base: b.name, variant: null, category: b.category, tags: b.tags, parts: open, ...common });
     for (const id of b.variants) {
       const v = variantById.get(id);
       if (!v) throw new Error(`${b.name}: unknown variant ${id}`);
@@ -126,7 +134,7 @@ export function expand(bases: BaseIcon[]): IconDef[] {
         variant: id,
         category: b.category,
         tags: [...b.tags, id, v.label.toLowerCase()],
-        parts: applyVariantLine(b.parts, v),
+        parts: applyVariantLine(open, v),
         ...common,
       });
     }

@@ -6,16 +6,17 @@
 //   variant badges cut a gap into the solid base.
 
 import { parsePath } from "../../packages/core/src/path.ts";
-import { polygonArea, polygons, pointInPolygon, runsToD, samplePoints, scaleAbout, transformD } from "../../packages/core/src/geom.ts";
+import { loopGap, polygonArea, polygons, pointInPolygon, runsToD, samplePoints, scaleAbout, transformD } from "../../packages/core/src/geom.ts";
 import { C } from "../../packages/core/src/dsl.ts";
 import type { Part } from "../../packages/core/src/dsl.ts";
 import type { SolidPart } from "../../packages/core/src/render.ts";
-import { GAP, STROKE, variantById } from "../../packages/core/src/variants.ts";
+import { GAP, LOOP_GAP, STROKE, variantById } from "../../packages/core/src/variants.ts";
 import { diff, empty, fromD, isEmpty, strokeOf, toD, union, type PK, type SkPath } from "./pathkit.ts";
 
 const KNOCK = 1.5; // knock-out line width inside filled bodies
 const BOLD = 2.25; // width used when an icon has no fillable body
 const DISC_R = 4.5;
+const NOTCH_DEPTH = 2.25; // how far the open-loop notch cuts into a solid body
 
 interface Sub {
   d: string;
@@ -92,6 +93,20 @@ export function solidBase(PK: PK, parts: Part[], solidFill: string[] = [], demot
   } else {
     body = union(PK, [...additive, ...knock.map((d) => strokeOf(PK, d, BOLD))]);
   }
+
+  // Open loop, solid edition: a notch at 1 o'clock into each body, where the line style opens.
+  // With explicit silhouettes, only those get notched (the drawn outlines sit on their edge).
+  const hasExplicit = closed.some((c) => c.explicit);
+  const notches = closed
+    .filter((c) => depth(c) % 2 === 0 && (!hasExplicit || c.explicit))
+    .flatMap((c) => {
+      const g = loopGap(parsePath(c.s.d)[0]!);
+      if (!g) return [];
+      const out = { x: g.p.x + g.n.x * 1.5, y: g.p.y + g.n.y * 1.5 };
+      const inn = { x: g.p.x - g.n.x * NOTCH_DEPTH, y: g.p.y - g.n.y * NOTCH_DEPTH };
+      return [strokeOf(PK, `M${out.x} ${out.y}L${inn.x} ${inn.y}`, LOOP_GAP)];
+    });
+  if (notches.length) body = diff(PK, body, union(PK, notches));
 
   // Accent: its own outline, with a gap ring cut out of the body around it.
   let accent = empty(PK);

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0 — 2026-11-12
+
+The DevX signature: **open loop**.
+
+- Every closed outline (≥ 14 units around) now opens at 1 o'clock with a 1.5 px gap,
+  computed exactly on the Bézier geometry. Dots, keyholes and variant badges stay closed.
+- Solid icons carry the matching notch at the same spot.
+- Applies everywhere: SVG, sprites, icon font, React, PNG and ICO.
+- Icon browser on GitHub Pages, README showcase, icon-request issue template.
+
 ## 1.0.0 — 2026-11-12
 
 First release.

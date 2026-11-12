@@ -1,6 +1,6 @@
 {
   "name": "@devx-icons/font",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "DevX Icons as a web font (line + solid) with the built-in accent colour.",
   "license": "MIT",
   "style": "devx-icons.css",

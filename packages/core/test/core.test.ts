@@ -17,6 +17,9 @@ import {
   samplePoints,
   shapeToD,
   type BaseIcon,
+  openLoopD,
+  loopGap,
+  LOOP_GAP,
 } from "../src/index.ts";
 import { loadBases } from "../../../scripts/lib/load.ts";
 import { validateIcon } from "../../../scripts/lib/validate.ts";
@@ -68,6 +71,35 @@ describe("geometry", () => {
     const fit = fitD(raw, 0.03);
     expect(fit.length).toBeLessThan(raw.length / 4);
     for (const p of samplePoints(fit, 16)) expect(Math.abs(Math.hypot(p.x - 12, p.y - 12) - 9)).toBeLessThan(0.25);
+  });
+});
+
+describe("open loop signature", () => {
+  it("opens a circle at 1 o'clock with the configured gap", () => {
+    const d = openLoopD(C(12, 12, 9), LOOP_GAP + STROKE);
+    const sp = parsePath(d);
+    expect(sp).toHaveLength(1);
+    expect(sp[0]!.closed).toBe(false);
+    const a = sp[0]!.start;
+    const b = sp[0]!.segs.at(-1)!.b;
+    // both ends sit on the circle, the gap midpoint faces 1 o'clock
+    const mid = { x: (a.x + b.x) / 2 - 12, y: (a.y + b.y) / 2 - 12 };
+    const ang = (Math.atan2(mid.y, mid.x) * 180) / Math.PI;
+    expect(ang).toBeCloseTo(-60, 0);
+    // chord between the ends ≈ the centreline gap
+    expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeCloseTo(LOOP_GAP + STROKE, 1);
+  });
+  it("leaves small shapes and open paths alone", () => {
+    expect(parsePath(openLoopD(C(12, 12, 1.5), 3.25))[0]!.closed).toBe(true);
+    expect(openLoopD("M2 12H22", 3.25)).toBe("M2 12L22 12");
+  });
+  it("every generated line icon keeps its closed outlines open", async () => {
+    const icons = expand(await loadBases());
+    for (const i of icons.slice(0, 400)) {
+      for (const p of i.parts.filter((q) => q.role !== "accent-fill" && i.variant === null)) {
+        for (const sp of parsePath(p.d)) if (sp.closed) expect(loopGap(sp)).toBeNull();
+      }
+    }
   });
 });
 

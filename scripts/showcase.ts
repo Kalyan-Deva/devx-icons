@@ -61,7 +61,7 @@ grid(VAR, "solid", 17, "variants-solid", 32, 28);
 <rect x="640" y="70" width="560" height="500" rx="28" fill="#ffffff" stroke="#e6e8ec"/>
 <text x="80" y="250" font-family="Segoe UI, Arial" font-weight="700" font-size="84" fill="#111111">DevX Icons</text>
 <text x="82" y="318" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">6,354 open-source icons</text>
-<text x="82" y="366" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">line + solid, one accent colour</text>
+<text x="82" y="366" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">open-loop line + solid, one accent</text>
 <rect x="82" y="420" width="16" height="16" rx="8" fill="#ff5a1f"/>
 <text x="110" y="434" font-family="Segoe UI, Arial" font-size="24" fill="#111111">SVG · Font · React · PNG · ICO · MIT</text>
 ${body}</svg>`;

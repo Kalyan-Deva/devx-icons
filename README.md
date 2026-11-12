@@ -17,12 +17,13 @@ Grab a ready-made pack from the [latest release](https://github.com/Kalyan-Deva/
 
 | Pack | What's inside |
 |---|---|
-| `devx-icons-1.0.0-svg.zip` | every icon as SVG (`line/` + `solid/`), two SVG sprites, `icons.json` |
-| `devx-icons-1.0.0-font.zip` | icon fonts (woff2 + ttf, line + solid) and `devx-icons.css` |
-| `devx-icons-1.0.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128 and 256 px, line + solid |
-| `devx-icons-1.0.0-ico.zip` | one multi-size `.ico` per icon (16 to 256 px), line + solid |
+| `devx-icons-1.1.0-svg.zip` | every icon as SVG (`line/` + `solid/`), two SVG sprites, `icons.json` |
+| `devx-icons-1.1.0-font.zip` | icon fonts (woff2 + ttf, line + solid) and `devx-icons.css` |
+| `devx-icons-1.1.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128 and 256 px, line + solid |
+| `devx-icons-1.1.0-ico.zip` | one multi-size `.ico` per icon (16 to 256 px), line + solid |
 | `devx-icons-*.tgz` | the npm packages (`devx-icons`, `@devx-icons/font`, `@devx-icons/react`) |
 
+- **Open loop (the DevX signature):** every closed outline opens at 1 o'clock with the same 1.5 px gap; solid icons carry a matching notch in the same spot, so the set is recognisable at a glance
 - 24 × 24 grid, 2 px padding, 1.75 stroke, round caps and joins, ~3 px corner radius
 - **Accent element:** every multi-part icon has one detail drawn in `var(--devx-accent)`,
   falling back to `currentColor` — set one CSS variable and every icon gets a second colour
@@ -61,9 +62,9 @@ Browse them: `pnpm dev` → http://localhost:3100 (search, line/solid, size, str
 Until the packages are on the npm registry, install them straight from the release:
 
 ```bash
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-react-1.0.0.tgz
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-1.0.0.tgz
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.0.0/devx-icons-font-1.0.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-react-1.1.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-1.1.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-font-1.1.0.tgz
 ```
 
 ### React — `@devx-icons/react`

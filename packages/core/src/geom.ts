@@ -218,3 +218,126 @@ export function polygonArea(poly: Pt[]): number {
   for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) s += (poly[j]!.x + poly[i]!.x) * (poly[j]!.y - poly[i]!.y);
   return Math.abs(s / 2);
 }
+
+// ---------------------------------------------------------------------------
+// Open loop — the DevX signature. Every closed outline opens at 1 o'clock.
+
+/** Direction of the opening from a shape's centre: 1 o'clock (30° right of up). */
+export const LOOP_DIR: Pt = { x: 0.5, y: -Math.sqrt(3) / 2 };
+/** Shapes shorter than this (perimeter) stay closed: dots, keyholes, tiny rings. */
+export const LOOP_MIN_PERIMETER = 14;
+
+export interface LoopGap {
+  seg: number;
+  t: number;
+  p: Pt;
+  /** Outward unit normal at p. */
+  n: Pt;
+  perimeter: number;
+}
+
+const unit = (v: Pt): Pt => {
+  const l = Math.hypot(v.x, v.y) || 1;
+  return { x: v.x / l, y: v.y / l };
+};
+
+function tangentAt(s: Seg, t: number): Pt {
+  const e = 1e-3;
+  const a = pointAt(s, Math.max(0, t - e));
+  const b = pointAt(s, Math.min(1, t + e));
+  return unit({ x: b.x - a.x, y: b.y - a.y });
+}
+
+/** Where a closed subpath opens: the outline point facing 1 o'clock from its centre. */
+export function loopGap(sp: Subpath): LoopGap | null {
+  if (!sp.closed || !sp.segs.length) return null;
+  const N = 24;
+  const pts: { seg: number; t: number; p: Pt }[] = [];
+  let perimeter = 0;
+  sp.segs.forEach((s, i) => {
+    perimeter += segLength(s);
+    for (let k = 0; k < N; k++) pts.push({ seg: i, t: k / N, p: pointAt(s, k / N) });
+  });
+  if (perimeter < LOOP_MIN_PERIMETER) return null;
+  const c = pts.reduce((a, q) => ({ x: a.x + q.p.x / pts.length, y: a.y + q.p.y / pts.length }), { x: 0, y: 0 });
+  // Score: alignment with the 1 o'clock ray, then distance from the centre (outermost wins).
+  const score = (p: Pt) => {
+    const v = { x: p.x - c.x, y: p.y - c.y };
+    const d = Math.hypot(v.x, v.y) || 1;
+    return (v.x * LOOP_DIR.x + v.y * LOOP_DIR.y) / d + d * 1e-3;
+  };
+  let best = pts[0]!;
+  for (const q of pts) if (score(q.p) > score(best.p)) best = q;
+  // Refine t locally (golden-section on the score).
+  const s = sp.segs[best.seg]!;
+  let lo = Math.max(0, best.t - 1 / N);
+  let hi = Math.min(1, best.t + 1 / N);
+  for (let k = 0; k < 30; k++) {
+    const m1 = lo + (hi - lo) * 0.382;
+    const m2 = lo + (hi - lo) * 0.618;
+    if (score(pointAt(s, m1)) < score(pointAt(s, m2))) lo = m1;
+    else hi = m2;
+  }
+  const t = (lo + hi) / 2;
+  const p = pointAt(s, t);
+  const tan = tangentAt(s, t);
+  let n: Pt = { x: tan.y, y: -tan.x };
+  if (n.x * (p.x - c.x) + n.y * (p.y - c.y) < 0) n = { x: -n.x, y: -n.y };
+  return { seg: best.seg, t, p, n, perimeter };
+}
+
+/** Cut the first `len` units of arc length off a run (or the last, with fromEnd). */
+function trimRun(run: Run, len: number, fromEnd: boolean): Run {
+  const segs = fromEnd ? [...run].reverse() : [...run];
+  let left = len;
+  while (segs.length) {
+    const s = segs[0]!;
+    const l = segLength(s, 16);
+    if (l > left) {
+      // binary search t so that the trimmed part has length `left`
+      let a = 0;
+      let b = 1;
+      for (let k = 0; k < 30; k++) {
+        const m = (a + b) / 2;
+        const part = fromEnd ? segLength(subSeg(s, 1 - m, 1), 16) : segLength(subSeg(s, 0, m), 16);
+        if (part < left) a = m;
+        else b = m;
+      }
+      const t = (a + b) / 2;
+      segs[0] = fromEnd ? subSeg(s, 0, 1 - t) : subSeg(s, t, 1);
+      break;
+    }
+    left -= l;
+    segs.shift();
+  }
+  return fromEnd ? segs.reverse() : segs;
+}
+
+/** Open every sufficiently large closed subpath of `d` at 1 o'clock, removing `gap` units. */
+export function openLoopD(d: string, gap: number): string {
+  const runs: Run[] = [];
+  const closed: boolean[] = [];
+  for (const sp of parsePath(d)) {
+    if (!sp.segs.length) {
+      runs.push([{ kind: "L", a: sp.start, b: { x: sp.start.x + 0.01, y: sp.start.y } }]);
+      closed.push(false);
+      continue;
+    }
+    const g = loopGap(sp);
+    if (!g) {
+      runs.push(sp.segs);
+      closed.push(sp.closed);
+      continue;
+    }
+    const s = sp.segs[g.seg]!;
+    const head = g.t > 1e-6 ? [subSeg(s, 0, g.t)] : [];
+    const tail = g.t < 1 - 1e-6 ? [subSeg(s, g.t, 1)] : [];
+    // Loop starting and ending at the gap point.
+    let run: Run = [...tail, ...sp.segs.slice(g.seg + 1), ...sp.segs.slice(0, g.seg), ...head];
+    const half = Math.min(gap, g.perimeter * 0.2) / 2;
+    run = trimRun(trimRun(run, half, false), half, true);
+    runs.push(run);
+    closed.push(false);
+  }
+  return runsToD(runs, closed);
+}
