@@ -55,6 +55,12 @@ importers:
 
   packages/font: {}
 
+  packages/react:
+    dependencies:
+      react:
+        specifier: '>=17'
+        version: 18.3.1
+
   packages/svg: {}
 
 packages:
