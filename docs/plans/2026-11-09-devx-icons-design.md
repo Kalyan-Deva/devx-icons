@@ -1,88 +1,69 @@
 # DevX Icons — design
 
-Date: 2026-11-09
-Status: approved in brainstorming, not started
+Date: 2026-11-09, revised 2026-11-12 (full pack)
+Status: v1.0.0 built — 6,354 icons, all formats packed in release/, not published
 
-## What it is
+## History
 
-An open-source, general-purpose icon set with a cozy hand-drawn style. Icons are
-drawn as clean geometric bases and a build-time generator gives them a seeded,
-deterministic hand-drawn wobble. v1 ships ~200 icons.
+1. 2026-11-09: cozy hand-drawn set via a seeded "wobble" generator — rejected as
+   unprofessional at UI sizes.
+2. Three professional directions (line / duotone / solid) — line chosen.
+3. 2026-11-12: references (Hugeicons-like) set the details; then the brief "4000+ icons,
+   categorised, finish the whole pack, all formats, no questions" with three choices:
+   - signature = **accent element** (second colour via `--devx-accent`)
+   - styles = **line + solid**
+   - formats = **SVG + sprite, icon font, React, PNG + ICO**
 
-## v1 scope
+## House style
 
-- Raw SVGs (`devx-icons`)
-- React components (`@devx-icons/react`)
-- Searchable docs site (Astro, Cloudflare Pages)
+- 24×24 grid, 2px padding (stroke centrelines within 1.5–22.5), stroke 1.75, round caps/joins.
+- Containers ~3px radius. Flat bases under objects. Corner brackets for scan icons.
+- **Accent:** every multi-part icon marks one element with `a()` / `af()`; rendered with
+  `stroke|fill: var(--devx-accent, currentColor)`. Single-stroke icons may have none.
+- **Open gaps:** variant badges (and the off-slash, dot) cut the base with an exact
+  1.25px visible gap (`GAP`), computed by splitting Béziers, not by masking.
 
-Later (v2+): Vue, Svelte, web component, icon font (woff2), Figma community file.
+## Scale: bases × variants
 
-## Style generation
+521 hand-drawn bases in `source/<category>.ts` (DSL in `packages/core/src/dsl.ts`).
+16 variants (plus, minus, check, x, alert, clock, lock, search, star, heart, upload,
+download, edit, bolt, off, dot) applied per category (`ALL`, `SOME`, `NONE`) → 6,354.
+Name collisions between a base and a generated variant fail the build.
 
-Chosen approach: **build-time path wobble**.
+## Solid style (scripts/lib/solid.ts, Skia PathKit)
 
-1. Base icon: clean SVG on a 24×24 grid, stroke 2, round caps/joins, `currentColor`.
-2. Generator flattens each path to points, offsets them perpendicular to the path
-   with seeded low-frequency noise (seed = hash of icon name), then re-fits smooth
-   Béziers.
-3. Hand-drawn cues: slight overshoot at corners/line ends, closed shapes with a
-   tiny overlap instead of a perfect join.
-4. Output stays a *stroked* path, so `strokeWidth` and `color` remain adjustable.
+- Outermost closed shapes (+ optional `sf` silhouettes) are filled bodies.
+- Nested closed shapes: small → holes, large → knock-out outlines (1.5).
+- Open strokes mostly inside a body → knock-outs; otherwise added as strokes.
+- No body at all → bold strokes (2.25).
+- Accent sits in its own gap ring; variants cut the solid base (disc badges with the
+  glyph knocked out, or the slash/dot).
+- Every boolean normalises operands with `simplify()` first (PathKit otherwise returned
+  empty results after chained ops — found on flame-off).
+- Outlines are refitted to cubics (Schneider, tol 0.03) — solid sprite 32 MB → 6.5 MB.
 
-Rejected:
-- Outlined variable-width ink: loses adjustable stroke width, bigger files.
-- Runtime `feTurbulence` filter: blurry at small sizes, inconsistent across browsers.
+## Formats
 
-All style parameters (amplitude, frequency, overshoot, smoothing) live in one
-config file; a contact-sheet page previews changes across the whole set.
-Wobble levels: `none`, `soft` (default), `sketchy` — each precomputed.
+| Package / file | Contents |
+|---|---|
+| `packages/svg` → `devx-icons` | line/, solid/, sprite/, icons.json |
+| `packages/font` → `@devx-icons/font` | woff2 + ttf (line, solid), css, codepoints.json |
+| `packages/react` → `@devx-icons/react` | `<Name>Icon` / `<Name>SolidIcon`, typed, tree-shakeable |
+| `dist/raster` | PNG 16–256, ICO (all sizes per file) |
+| `release/` | zips + npm tarballs |
 
-## Icon list (~200)
-
-Arrows & navigation ~25 · Actions ~35 · Files ~20 · Communication ~15 ·
-People ~10 · Media ~20 · Status ~15 · Interface ~35 · Time & weather ~15 ·
-Cozy extras ~10.
-
-Each icon has a metadata file: name, tags, category, version added.
-
-## React API
-
-```tsx
-import { Coffee } from "@devx-icons/react";
-<Coffee size={24} strokeWidth={2} color="currentColor" wobble="soft" />
-```
-
-- One component per icon, tree-shakeable, `sideEffects: false`.
-- Wobble levels are separate exports so unused variants aren't bundled.
-- TypeScript types; `aria-hidden` by default, `title` prop makes it labelled.
-
-## Docs site
-
-Grid with search (from metadata), category filters, live size / stroke / wobble /
-colour controls; click to copy SVG or JSX, or download.
-
-## Repo layout
-
-```
-icons/         base SVGs + metadata JSON
-generator/     wobble + optimisation (Node/TS, svgo)
-packages/svg/  devx-icons
-packages/react/@devx-icons/react
-site/          Astro docs site
-```
+Font: base glyphs U+E000…, accent glyphs U+F0000… overlaid by `::after`. Contours are
+re-oriented for the non-zero rule. `codepoints.json` is committed for stability.
 
 ## Quality gates
 
-- Snapshot tests: generator output is deterministic per seed.
-- Lint: 24px grid, stroke 2, round caps, no fills, viewBox `0 0 24 24`.
-- CI fails if an icon lacks metadata.
+- Generator validation: names, accents, safe area, non-empty solid.
+- Contact sheets (`pnpm sheets`) reviewed per category in both styles; font rendered
+  from the TTFs with resvg.
+- `pnpm check`: tsc + vitest (parser, geometry, gap cut, variants, rendering, the whole
+  set, codepoints, React rendering).
 
-## Licensing
+## Not done (needs Kalyan)
 
-Code: MIT. Icons: ISC (like Lucide). npm names `devx-icons` and
-`@devx-icons/react` were unclaimed on 2026-11-09.
-
-## Open items
-
-- Pick exact default wobble values by eye on the contact sheet.
-- GitHub repo name/visibility (public at launch).
+- Publishing to npm (`devx-icons`, `@devx-icons/font`, `@devx-icons/react`), GitHub repo,
+  docs-site deploy.

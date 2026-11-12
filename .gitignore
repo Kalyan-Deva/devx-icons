@@ -1,0 +1,15 @@
+node_modules/
+build/
+dist/
+release/
+*.log
+# generated (pnpm build)
+packages/svg/line/
+packages/svg/solid/
+packages/svg/sprite/
+packages/svg/icons.json
+packages/font/fonts/
+packages/font/devx-icons.css
+packages/react/dist/
+packages/*/LICENSE
+playground/public/data.json

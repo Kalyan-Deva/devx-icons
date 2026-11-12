@@ -1,0 +1,50 @@
+import { define, ALL, NONE, a, C, R, G, D, arc } from "./_lib.ts";
+
+const GEAR =
+  "M10.45 5.28L10.67 3.1A9 9 0 0 1 13.33 3.1L13.55 5.28A6.9 6.9 0 0 1 15.66 6.15L17.35 4.77A9 9 0 0 1 19.23 6.65L17.85 8.34A6.9 6.9 0 0 1 18.72 10.45L20.9 10.67A9 9 0 0 1 20.9 13.33L18.72 13.55A6.9 6.9 0 0 1 17.85 15.66L19.23 17.35A9 9 0 0 1 17.35 19.23L15.66 17.85A6.9 6.9 0 0 1 13.55 18.72L13.33 20.9A9 9 0 0 1 10.67 20.9L10.45 18.72A6.9 6.9 0 0 1 8.34 17.85L6.65 19.23A9 9 0 0 1 4.77 17.35L6.15 15.66A6.9 6.9 0 0 1 5.28 13.55L3.1 13.33A9 9 0 0 1 3.1 10.67L5.28 10.45A6.9 6.9 0 0 1 6.15 8.34L4.77 6.65A9 9 0 0 1 6.65 4.77L8.34 6.15A6.9 6.9 0 0 1 10.45 5.28Z";
+
+export { GEAR };
+
+export default define("interface", ALL, [
+  ["home", "house start main dashboard", ["M3.5 10.2 12 3.5l8.5 6.7", "M5.5 8.7V19a1 1 0 0 0 1 1H10", "M14 20h3.5a1 1 0 0 0 1-1V8.7", a("M10 20v-5.5h4V20")], { sf: ["M12 3.5l6.5 5.1V19a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V8.6z"] }],
+  ["menu", "hamburger navigation lines", ["M4 6.5h16", "M4 12h16", a("M4 17.5h16")], { v: NONE }],
+  ["settings", "gear cog preferences options", [GEAR, a(C(12, 12, 3))]],
+  ["grid", "apps tiles layout dashboard", [R(3.5, 3.5, 7, 7, 2), R(13.5, 3.5, 7, 7, 2), R(3.5, 13.5, 7, 7, 2), a(R(13.5, 13.5, 7, 7, 2))]],
+  ["list", "items rows bullet", ["M9 6.5h11", "M9 12h11", "M9 17.5h11", a(D(4.5, 6.5) + D(4.5, 12) + D(4.5, 17.5))]],
+  ["layout", "template page structure", [R(3.5, 3.5, 17, 17, 3), "M3.5 9h17", a("M9.5 9v11.5")]],
+  ["sidebar", "panel left drawer", [R(3.5, 4, 17, 16, 3), a("M9 4v16")]],
+  ["panel-right", "sidebar drawer inspector", [R(3.5, 4, 17, 16, 3), a("M15 4v16")]],
+  ["panel-bottom", "console drawer footer", [R(3.5, 4, 17, 16, 3), a("M3.5 15h17")]],
+  ["filter", "funnel sort refine", ["M4 4.5h16l-6.25 7.5", "M10.25 12 4 4.5", a("M10.25 12v8l3.5-1.75V12")], { sf: ["M4 4.5h16l-6.25 7.5v6.25L10.25 20v-8z"] }],
+  ["sliders", "controls adjust settings mixer", ["M4 6.5h7.25", C(16, 6.5, 1.75), a(C(8, 12, 1.75)), "M12.75 12H20", "M4 17.5h4.25", C(13, 17.5, 1.75), "M17.75 17.5H20"]],
+  ["eye", "view visible show watch preview", ["M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z", a(C(12, 12, 3))]],
+  ["more-horizontal", "dots ellipsis options overflow", [C(5.5, 12, 1), C(12, 12, 1), a(C(18.5, 12, 1))], { v: NONE }],
+  ["more-vertical", "dots ellipsis options kebab", [C(12, 5.5, 1), C(12, 12, 1), a(C(12, 18.5, 1))], { v: NONE }],
+  ["maximize", "expand fullscreen enlarge", ["M14.5 3.5h6v6", "M9.5 20.5h-6v-6", a("M20.5 3.5 14 10"), "M3.5 20.5 10 14"], { v: NONE }],
+  ["minimize", "shrink collapse exit fullscreen", ["M4 14h6v6", "M20 10h-6V4", a("M14 10l6.5-6.5"), "M3.5 20.5 10 14"], { v: NONE }],
+  ["window", "app browser frame", [R(3.5, 4, 17, 16, 3), "M3.5 9h17", a(D(6.75, 6.5) + D(9.5, 6.5))]],
+  ["pointer", "cursor mouse arrow click select", [G(4.5, 4.5, 19, 10.25, 12.5, 12.5, 10.25, 19), a("M13 13l5.5 5.5")]],
+  ["bookmark", "save favourite ribbon read later", ["M6.5 3.5h11a1 1 0 0 1 1 1v16L12 16.5l-6.5 4v-16a1 1 0 0 1 1-1z", a("M9.5 8h5")]],
+  ["tag", "label price category", ["M3.5 5a1.5 1.5 0 0 1 1.5-1.5h6.4a2 2 0 0 1 1.4.6l7.6 7.6a2 2 0 0 1 0 2.8l-5.6 5.6a2 2 0 0 1-2.8 0l-7.9-7.9a2 2 0 0 1-.6-1.4z", a(C(8, 8, 1.5))]],
+  ["link", "chain url hyperlink connect", ["M10 13.5a4 4 0 0 0 5.66 0l3-3a4 4 0 0 0-5.66-5.66l-1 1", a("M14 10.5a4 4 0 0 0-5.66 0l-3 3a4 4 0 0 0 5.66 5.66l1-1")]],
+  ["share", "network nodes send social", [C(17.5, 5.5, 2.5), C(6.5, 12, 2.5), a(C(17.5, 18.5, 2.5)), "M8.65 10.75l6.7-4", "M8.65 13.25l6.7 4"]],
+  ["copy", "duplicate clone", [R(8.5, 8.5, 12, 12, 3), a("M15.5 5.5V5A1.5 1.5 0 0 0 14 3.5H6A2.5 2.5 0 0 0 3.5 6v8A1.5 1.5 0 0 0 5 15.5h.5")]],
+  ["clipboard", "paste board copy", ["M8.5 4.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-13a2 2 0 0 0-2-2h-1.5", a(R(9, 3, 6, 3, 1))], { sf: [R(5, 4.5, 14, 17, 2)] }],
+  ["layers", "stack levels depth", [G(12, 3.5, 21, 8, 12, 12.5, 3, 8), "M3 12l9 4.5 9-4.5", a("M3 16l9 4.5 9-4.5")]],
+  ["gauge", "dashboard speed meter performance", [arc(12, 15, 8.5, 180, 360), "M3.5 15h2", "M18.5 15h2", a("M12 15l4-4.5"), "M7 19.5h10"]],
+  ["toggle-on", "switch enabled on", [R(2.5, 6.5, 19, 11, 5.5), a(C(16, 12, 3))]],
+  ["toggle-off", "switch disabled off", [R(2.5, 6.5, 19, 11, 5.5), a(C(8, 12, 3))]],
+  ["search", "find magnifier lookup", [C(11, 11, 6.5), a("m16 16 4.5 4.5")], { v: NONE }],
+  ["zoom-in", "magnify enlarge plus", [C(11, 11, 6.5), "m16 16 4.5 4.5", a("M11 8.5v5M8.5 11h5")], { v: NONE }],
+  ["zoom-out", "magnify reduce minus", [C(11, 11, 6.5), "m16 16 4.5 4.5", a("M8.5 11h5")], { v: NONE }],
+  ["apps", "grid launcher dots", [C(6, 6, 1), C(12, 6, 1), C(18, 6, 1), C(6, 12, 1), a(C(12, 12, 1)), C(18, 12, 1), C(6, 18, 1), C(12, 18, 1), C(18, 18, 1)], { v: NONE }],
+  ["columns", "layout split vertical", [R(3.5, 4, 17, 16, 3), a("M12 4v16")]],
+  ["rows", "layout split horizontal", [R(3.5, 4, 17, 16, 3), a("M3.5 12h17")]],
+  ["card", "tile component preview", [R(3.5, 4, 17, 16, 3), "M3.5 13h17", a("M7 16.5h5")]],
+  ["form", "input fields survey", [R(3.5, 4, 17, 6, 2), a(R(3.5, 14, 17, 6, 2)), "M6.5 7h5"]],
+  ["input", "text field cursor", [R(2.5, 6.5, 19, 11, 3), a("M7 9.5v5")]],
+  ["notification-card", "toast banner message", [R(3.5, 5, 17, 14, 3), a(C(8, 12, 1.5)), "M11.5 10.5h5.5", "M11.5 13.5h3.5"]],
+  ["loader", "loading spinner progress busy", ["M12 3.5V6", "M12 18v2.5", "M5.99 5.99l1.77 1.77", "M16.24 16.24l1.77 1.77", "M3.5 12H6", "M18 12h2.5", "M5.99 18.01l1.77-1.77", a("M16.24 7.76l1.77-1.77")], { v: NONE }],
+  ["refresh-page", "reload browser", [R(3.5, 4, 17, 16, 3), "M3.5 9h17", a("M14.5 13.5a2.75 2.75 0 1 1-.8-2"), "M14 10.5v1.5h-1.5"]],
+  ["fingerprint-scan", "touch id biometric", ["M3.5 8V6.5a3 3 0 0 1 3-3H8", "M16 3.5h1.5a3 3 0 0 1 3 3V8", "M20.5 16v1.5a3 3 0 0 1-3 3H16", "M8 20.5H6.5a3 3 0 0 1-3-3V16", a("M8.5 15.5V12a3.5 3.5 0 0 1 7 0v.5"), "M12 12v4.5", "M15.5 15.5v.5"]],
+]);

@@ -1,0 +1,43 @@
+import { define, ALL, a, C, R, D } from "./_lib.ts";
+
+const SCREEN = "M5 15V7a2.5 2.5 0 0 1 2.5-2.5h9A2.5 2.5 0 0 1 19 7v8";
+const LAPBASE = "M5 15l-2.1 3.3a.8.8 0 0 0 .7 1.2h16.8a.8.8 0 0 0 .7-1.2L19 15";
+
+export default define("devices", ALL, [
+  ["laptop", "computer notebook macbook", [SCREEN, a("M5 15h14"), LAPBASE], { sf: ["M7.5 4.5h9A2.5 2.5 0 0 1 19 7v8l2.1 3.3a.8.8 0 0 1-.7 1.2H3.6a.8.8 0 0 1-.7-1.2L5 15V7a2.5 2.5 0 0 1 2.5-2.5z"] }],
+  ["monitor", "desktop screen display computer", [R(3, 4, 18, 12.5, 3), "M12 16.5v3.5", a("M8 20h8")]],
+  ["smartphone", "mobile phone cell iphone android", [R(6, 2.5, 12, 19, 3), a("M10.5 18.5h3")]],
+  ["tablet", "ipad device screen", [R(4, 3, 16, 18, 3), a("M10.5 17.5h3")]],
+  ["watch", "smartwatch wearable time", [R(6.5, 6.5, 11, 11, 3), "M9 6.5l.5-3h5l.5 3", "M9 17.5l.5 3h5l.5-3", a("M12 10v2.25l1.25 1")]],
+  ["keyboard", "type keys input", [R(2.5, 6, 19, 12, 3), D(6.5, 9.5) + D(10, 9.5) + D(14, 9.5) + D(17.5, 9.5), a("M8 14.5h8")]],
+  ["mouse", "click pointer device", [R(6.5, 3, 11, 18, 5.5), a("M12 6.5v3")]],
+  ["printer", "print paper output", ["M7 8.5V4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v4.5", "M7 17H5.5a2 2 0 0 1-2-2v-4.5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2H17", a(R(7, 13.5, 10, 7, 1))], { sf: ["M5.5 8.5h13a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-4.5a2 2 0 0 1 2-2z"] }],
+  ["server", "rack hosting backend", [R(3.5, 3.5, 17, 7, 2.5), R(3.5, 13.5, 17, 7, 2.5), a(D(7.5, 7) + D(7.5, 17)), "M12 7h4.5M12 17h4.5"]],
+  ["cpu", "processor chip hardware", [R(6, 6, 12, 12, 2.5), a(R(9.5, 9.5, 5, 5, 1)), "M9.5 3v3M14.5 3v3M9.5 18v3M14.5 18v3M3 9.5h3M3 14.5h3M18 9.5h3M18 14.5h3"]],
+  ["hard-drive", "disk storage ssd", [R(3, 13, 18, 7, 2.5), "M3 13 5.5 5.5A2 2 0 0 1 7.4 4h9.2a2 2 0 0 1 1.9 1.5L21 13", a(D(7, 16.5)), "M11 16.5h6"]],
+  ["usb", "plug connector flash drive", [R(7, 8.5, 10, 8, 2), "M9 8.5V4h6v4.5", a("M10.5 6h.01M13.5 6h.01"), "M12 16.5v4"]],
+  ["headphones", "audio music listen", ["M3.5 17v-5a8.5 8.5 0 0 1 17 0v5", a(R(3.5, 13.5, 4, 7, 1.5)), R(16.5, 13.5, 4, 7, 1.5)]],
+  ["speaker", "audio sound music woofer", [R(5, 3, 14, 18, 3), C(12, 14, 3.5), a(D(12, 7))]],
+  ["mic", "microphone voice record", [R(9, 3, 6, 11, 3), a("M5.5 11.5a6.5 6.5 0 0 0 13 0"), "M12 18v3"]],
+  ["camera", "photo picture snapshot", ["M3 9a2.5 2.5 0 0 1 2.5-2.5h1.8l1.4-2.1a1 1 0 0 1 .83-.4h4.94a1 1 0 0 1 .83.4l1.4 2.1h1.8A2.5 2.5 0 0 1 21 9v8.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z", a(C(12, 13, 3.5))]],
+  ["webcam", "camera video stream", [C(12, 10, 7), a(C(12, 10, 2.5)), "M8 20.5h8", "M12 17v3.5"]],
+  ["tv", "television screen display", [R(2.5, 6.5, 19, 13, 3), a("m8.5 3 3.5 3.5L15.5 3")]],
+  ["gamepad", "controller game console play", ["M7 7h10a4 4 0 0 1 3.92 3.2l.9 4.6a2.8 2.8 0 0 1-4.9 2.3L15.5 16h-7l-1.42 1.1a2.8 2.8 0 0 1-4.9-2.3l.9-4.6A4 4 0 0 1 7 7z", "M8 10v4M6 12h4", a(D(15, 11) + D(17, 13))]],
+  ["router", "wifi modem network internet", [R(3, 12.5, 18, 7.5, 2.5), a(D(7, 16.25) + D(10, 16.25)), "M17 12.5V4.5"]],
+  ["wifi", "wireless internet signal network", ["M2.5 9.5a13.5 13.5 0 0 1 19 0", "M5.5 13a9 9 0 0 1 13 0", "M8.5 16.5a4.5 4.5 0 0 1 7 0", a(D(12, 19.75))]],
+  ["bluetooth", "wireless pair connect", ["M7 7.5 17 16.5 12 21V3l5 4.5-10 9"]],
+  ["battery", "power charge energy level", [R(2.5, 7, 16, 10, 2.5), "M21.5 10.5v3", a("M6 10v4M9.5 10v4")]],
+  ["battery-charging", "power charging energy", [R(2.5, 7, 16, 10, 2.5), "M21.5 10.5v3", a("m11.5 9-2 3h3l-2 3")]],
+  ["plug", "power socket electricity", ["M9 3.5v4M15 3.5v4", "M6.5 7.5h11V11a5.5 5.5 0 0 1-11 0z", a("M12 16.5v4")]],
+  ["sd-card", "memory storage card", ["M9 3h7.5A2.5 2.5 0 0 1 19 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 18.5V7z", a("M10 7v2.5M13 7v2.5M16 7v2.5")]],
+  ["disc", "cd dvd media optical", [C(12, 12, 9), a(C(12, 12, 2.5)), "M12 6.5A5.5 5.5 0 0 0 6.5 12"]],
+  ["remote", "controller tv control", [R(8, 2.5, 8, 19, 3), a(C(12, 8, 1.75)), "M12 13h.01M12 16.5h.01"]],
+  ["vr-headset", "virtual reality goggles ar", ["M3 9.5A2.5 2.5 0 0 1 5.5 7h13A2.5 2.5 0 0 1 21 9.5v6a2.5 2.5 0 0 1-2.5 2.5h-3l-2-2.5h-3l-2 2.5h-3A2.5 2.5 0 0 1 3 15.5z", a("M9 4a5 5 0 0 1 6 0")]],
+  ["robot", "bot ai automation android", [R(5, 8, 14, 11, 3), a(D(9.5, 13) + D(14.5, 13)), "M12 8V5", C(12, 3.5, 1), "M3 12.5v2M21 12.5v2"]],
+  ["cast", "chromecast stream screen mirror", ["M3.5 8V6.5a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v11a3 3 0 0 1-3 3H14", a(D(4, 20)), "M3.5 16.5a4 4 0 0 1 4 4", "M3.5 12.5a8 8 0 0 1 8 8"]],
+  ["signal", "bars reception strength cellular", ["M5 19.5v-3", "M10 19.5v-7", "M15 19.5V8", a("M20 19.5V4")]],
+  ["desktop-tower", "pc computer case", [R(6, 2.5, 12, 19, 2.5), a(C(12, 16, 1.75)), "M9 6.5h6", "M9 9.5h6"]],
+  ["scanner", "scan document copy", [R(3, 11, 18, 9, 2.5), a("M3 15h18"), "M6 11 17.5 4"]],
+  ["projector", "presentation beam cinema", [R(2.5, 8, 19, 9, 3), a(C(15.5, 12.5, 2.5)), "M6 12.5h4", "M5.5 17v2.5M18.5 17v2.5"]],
+  ["satellite-dish", "antenna signal broadcast", ["M5.5 8a10 10 0 0 0 10.5 10.5z", a("M10.5 13.5 15 9"), C(16, 8, 1), "M4 20.5h7l-2.5-3.5"]],
+]);

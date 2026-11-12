@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DevX Icons</title>
+    <meta name="description" content="Open-source precision line and solid icons with a built-in accent colour." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap bar">
+        <a class="brand" href="/"><span class="mark" id="mark"></span>DevX Icons</a>
+        <nav><span class="pill" id="count">Loading…</span><span class="muted">MIT · v1.0</span></nav>
+      </div>
+    </header>
+
+    <section class="hero wrap">
+      <h1>Precise icons with a signature accent</h1>
+      <p>
+        <span id="hero-count">Thousands of</span> icons in line and solid. A 24px grid, 1.75 stroke and rounded corners,
+        clean gaps where shapes meet, and one accent element per icon that follows
+        <code>--devx-accent</code>.
+      </p>
+      <div class="hero-row" id="hero-row"></div>
+    </section>
+
+    <section class="get wrap">
+      <article><h3>React</h3><pre>npm i @devx-icons/react
+
+&lt;HomeIcon size={20} /&gt;
+&lt;HomeSolidIcon accent="#ff5a1f" /&gt;</pre></article>
+      <article><h3>SVG + sprite</h3><pre>npm i devx-icons
+
+&lt;use href="devx-line.svg#devx-home"/&gt;</pre></article>
+      <article><h3>Icon font</h3><pre>npm i @devx-icons/font
+
+&lt;i class="devx devx-home"&gt;&lt;/i&gt;</pre></article>
+      <article><h3>PNG + ICO</h3><pre>16 · 24 · 32 · 48 · 64 · 128 · 256 px
+line + solid, one .ico per icon</pre></article>
+    </section>
+
+    <div class="toolbar wrap" id="toolbar">
+      <input id="q" type="search" placeholder="Search icons" autocomplete="off" />
+      <div class="seg" id="style">
+        <button data-s="line" class="on">Line</button>
+        <button data-s="solid">Solid</button>
+      </div>
+      <div class="knobs">
+        <label>Size <input id="size" type="range" min="16" max="48" step="4" value="28" /><b id="size-v"></b></label>
+        <label id="stroke-l">Stroke <input id="stroke" type="range" min="1" max="2.5" step="0.25" value="1.75" /><b id="stroke-v"></b></label>
+        <label class="swatch">Ink <input id="color" type="color" value="#111111" /></label>
+        <label class="swatch">Accent <input id="accent" type="color" value="#ff5a1f" /></label>
+        <label class="check"><input id="base-only" type="checkbox" /> Bases only</label>
+      </div>
+      <div class="chips" id="cats"></div>
+    </div>
+
+    <main class="wrap">
+      <p class="result" id="result"></p>
+      <div class="grid" id="grid"></div>
+      <div id="sentinel"></div>
+      <p class="empty" id="empty" hidden>No icons match that search.</p>
+    </main>
+
+    <aside class="toast" id="toast" role="status" aria-live="polite"></aside>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "@devx-icons/react",
+  "version": "1.0.0",
+  "description": "DevX Icons for React: 6,000+ precision line and solid icons with a built-in accent colour.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./icons/*": { "types": "./dist/icons/*.d.ts", "import": "./dist/icons/*.js" },
+    "./meta": { "types": "./dist/meta.d.ts", "import": "./dist/meta.js" }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "peerDependencies": { "react": ">=17" },
+  "keywords": ["icons", "react", "svg", "react-icons", "devx"]
+}
