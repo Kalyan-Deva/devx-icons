@@ -134,7 +134,7 @@ for (const el of [size, stroke]) el.addEventListener("change", filter);
 for (const el of [size, stroke, color, accent]) el.addEventListener("input", knobs);
 baseOnly.addEventListener("change", filter);
 
-const res = await fetch("/data.json");
+const res = await fetch(`${import.meta.env.BASE_URL}data.json`);
 rows = await res.json();
 const byName = new Map(rows.map((r) => [r.n, r]));
 const counts = new Map<string, number>();

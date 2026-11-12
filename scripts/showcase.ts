@@ -47,3 +47,27 @@ grid(PICK, "solid", 12, "showcase-solid");
 const VAR = ["folder", ...["plus", "minus", "check", "x", "alert", "clock", "lock", "search", "star", "heart", "upload", "download", "edit", "bolt", "off", "dot"].map((v) => `folder-${v}`)];
 grid(VAR, "line", 17, "variants-line", 32, 28);
 grid(VAR, "solid", 17, "variants-solid", 32, 28);
+
+// Social card 1280×640 (repo social preview + og:image)
+{
+  const names = ["home", "settings", "bell-dot", "shield-check", "folder-plus", "cloud-upload", "terminal", "git-branch", "rocket", "sparkles", "chart-pie", "lock", "user-heart", "camera-off", "map-pin", "coffee"];
+  const items = names.map((n) => geo.get(n)!).filter(Boolean);
+  const S = 64, G = 34, cols = 4, x0 = 741, y0 = 141;
+  const body = items
+    .map((g, i) => icon(g, i % 2 ? "solid" : "line", x0 + (i % cols) * (S + G), y0 + Math.floor(i / cols) * (S + G), S))
+    .join("");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640">
+<rect width="1280" height="640" fill="#f5f6f8"/>
+<rect x="640" y="70" width="560" height="500" rx="28" fill="#ffffff" stroke="#e6e8ec"/>
+<text x="80" y="250" font-family="Segoe UI, Arial" font-weight="700" font-size="84" fill="#111111">DevX Icons</text>
+<text x="82" y="318" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">6,354 open-source icons</text>
+<text x="82" y="366" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">line + solid, one accent colour</text>
+<rect x="82" y="420" width="16" height="16" rx="8" fill="#ff5a1f"/>
+<text x="110" y="434" font-family="Segoe UI, Arial" font-size="24" fill="#111111">SVG · Font · React · PNG · ICO · MIT</text>
+${body}</svg>`;
+  const png = new Resvg(svg, { font: { loadSystemFonts: true } }).render().asPng();
+  writeFileSync(new URL("docs/images/social-preview.png", ROOT), png);
+  mkdirSync(new URL("playground/public/", ROOT), { recursive: true });
+  writeFileSync(new URL("playground/public/social-preview.png", ROOT), png);
+  console.log("docs/images/social-preview.png");
+}

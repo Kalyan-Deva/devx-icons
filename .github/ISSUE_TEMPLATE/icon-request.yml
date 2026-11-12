@@ -1,0 +1,29 @@
+name: Icon request
+description: Ask for a new icon (or a new variant of an existing one)
+title: "Icon request: "
+labels: ["icon request"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Icon name
+      description: Lowercase, kebab-case if you can (e.g. `wifi-high`, `pull-request-draft`).
+    validations:
+      required: true
+  - type: textarea
+    id: use
+    attributes:
+      label: Where would you use it?
+      description: A sentence on the UI or context helps pick the right metaphor.
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: Category
+      description: e.g. development, devices, files, business — or "new category".
+  - type: textarea
+    id: refs
+    attributes:
+      label: References (optional)
+      description: Screenshots or links showing the concept. Please don't attach other icon sets' files.

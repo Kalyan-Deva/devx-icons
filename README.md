@@ -6,6 +6,8 @@
 ![Icons](https://img.shields.io/badge/icons-6%2C354-111111)
 ![License](https://img.shields.io/badge/license-MIT-111111)
 
+**[Browse all 6,354 icons →](https://kalyan-deva.github.io/devx-icons/)** search, switch line/solid, pick your accent colour, click to copy.
+
 ![DevX Icons, line style](docs/images/showcase-line.png)
 ![DevX Icons, solid style](docs/images/showcase-solid.png)
 

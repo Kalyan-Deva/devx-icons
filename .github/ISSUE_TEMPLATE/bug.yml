@@ -1,0 +1,22 @@
+name: Bug
+description: An icon looks wrong, a package misbehaves, or a build fails
+labels: ["bug"]
+body:
+  - type: input
+    id: icon
+    attributes:
+      label: Icon(s) or package
+      description: e.g. `folder-plus` (solid), `@devx-icons/react`, icon font
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Version and environment
+      description: e.g. 1.0.0, Chrome 131, React 18, Windows icon (.ico)
