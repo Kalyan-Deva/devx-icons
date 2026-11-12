@@ -4,8 +4,8 @@
 //   release/devx-icons-<v>-png.zip    PNG 16–256 (line + solid)
 //   release/devx-icons-<v>-ico.zip    multi-size ICO (line + solid)
 //   release/npm/*.tgz                 npm pack of devx-icons, @devx-icons/font, @devx-icons/react
-import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
+import { execFileSync, execSync } from "node:child_process";
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const root = fileURLToPath(new URL("../", import.meta.url)).replace(/[\\/]$/, "");
@@ -51,11 +51,7 @@ if (existsSync(`${root}/dist/raster/png`)) {
 
 for (const p of ["svg", "font", "react"]) {
   cpSync(`${root}/LICENSE`, `${root}/packages/${p}/LICENSE`);
-  execFileSync(process.platform === "win32" ? "pnpm.cmd" : "pnpm", ["pack", "--pack-destination", `${out}/npm`], {
-    cwd: `${root}/packages/${p}`,
-    stdio: "ignore",
-    shell: process.platform === "win32",
-  });
+  execSync(`pnpm pack --pack-destination "${out}/npm"`, { cwd: `${root}/packages/${p}`, stdio: "ignore" });
 }
-console.log(`  release/npm: ${execFileSync(process.platform === "win32" ? "cmd" : "ls", process.platform === "win32" ? ["/c", "dir", "/b", `${out}\\npm`] : [`${out}/npm`]).toString().trim().split(/\r?\n/).join(", ")}`);
+console.log(`  release/npm: ${readdirSync(`${out}/npm`).join(", ")}`);
 rmSync(stage, { recursive: true, force: true });
