@@ -1,13 +1,17 @@
 # @devx-icons/react
 
-6,354 DevX Icons as React components, line and solid.
+7,418 DevX Icons for React: line in four weights, solid, duotone, bulk, and built-in animation.
 
 ```tsx
-import { HomeIcon, HomeSolidIcon } from "@devx-icons/react";
+import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@devx-icons/react";
 
-<HomeIcon size={20} strokeWidth={1.5} accent="#ff5a1f" />
-<HomeSolidIcon title="Home" />
+<HomeIcon weight="light" size={20} />
+<HomeDuotoneIcon accent="#ff5a1f" />
+<HomeBulkIcon title="Home" />
+<SettingsIcon animate />
 ```
 
-Props: `size`, `color`, `strokeWidth` (line), `accent`, `title`, plus any SVG prop.
-Tree-shakeable (`sideEffects: false`); deep imports via `@devx-icons/react/icons/HomeIcon`. MIT
+Props: `size`, `color`, `weight` (`thin` | `light` | `regular` | `bold`), `strokeWidth`, `accent`, `title`, `animate`, plus any SVG prop.
+Four components per icon, tree-shakeable (`sideEffects: false`), typed.
+
+[Browse all icons](https://kalyan-deva.github.io/devx-icons/) · [GitHub](https://github.com/Kalyan-Deva/devx-icons) · MIT

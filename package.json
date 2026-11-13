@@ -16,7 +16,8 @@
     "typecheck": "tsc -p .",
     "check": "pnpm typecheck && pnpm test",
     "showcase": "tsx scripts/showcase.ts",
-    "check-names": "tsx scripts/check-names.ts"
+    "check-names": "tsx scripts/check-names.ts",
+    "publish": "tsx scripts/publish.ts"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

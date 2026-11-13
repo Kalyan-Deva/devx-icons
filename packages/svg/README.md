@@ -1,13 +1,11 @@
 # devx-icons
 
-6,354 precision line and solid SVG icons with a built-in accent colour (`--devx-accent`).
+7,418 open-source SVG icons with the open-loop signature and a built-in accent colour (`--devx-accent`).
 
-- `line/<name>.svg`, `solid/<name>.svg`
-- `sprite/devx-line.svg`, `sprite/devx-solid.svg` — `<use href="…#devx-<name>">`
-- `icons.json` — category, tags, base and variant for every icon
+- `line/` `thin/` `light/` `bold/` — line in four weights
+- `solid/` `duotone/` `bulk/` `animated/`
+- `sprite/devx-{line,solid,duotone,bulk}.svg` — `<use href="…#devx-<name>">`
+- `icons.json` — category, tags, base, variant and animation for every icon
 
-```css
-:root { --devx-accent: #ff5a1f; }
-```
-
-React: `@devx-icons/react` · Font: `@devx-icons/font` · MIT
+React · Vue · Svelte · web component · Iconify · font: see `@devx-icons/*`.
+[Browse all icons](https://kalyan-deva.github.io/devx-icons/) · [GitHub](https://github.com/Kalyan-Deva/devx-icons) · MIT
