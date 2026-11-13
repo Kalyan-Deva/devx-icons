@@ -1,0 +1,29 @@
+{
+  "name": "@devx-icons/iconify",
+  "version": "1.2.0",
+  "description": "DevX Icons as Iconify JSON sets: devx, devx-thin, devx-light, devx-bold, devx-solid, devx-duotone, devx-bulk.",
+  "license": "MIT",
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/iconify"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./json/*": "./json/*"
+  },
+  "files": [
+    "json"
+  ],
+  "keywords": [
+    "icons",
+    "iconify",
+    "json",
+    "devx"
+  ]
+}

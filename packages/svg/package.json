@@ -1,11 +1,17 @@
 {
   "name": "devx-icons",
-  "version": "1.1.0",
-  "description": "6,000+ precision line and solid SVG icons with a built-in accent colour. 24px grid, 1.75 stroke.",
+  "version": "1.2.0",
+  "description": "7,000+ open-source SVG icons: line (thin, light, regular, bold), solid, duotone, bulk and animated, with the open-loop signature and an accent colour.",
   "license": "MIT",
   "files": [
     "line",
+    "thin",
+    "light",
+    "bold",
     "solid",
+    "duotone",
+    "bulk",
+    "animated",
     "sprite",
     "icons.json"
   ],

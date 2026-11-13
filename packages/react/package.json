@@ -1,7 +1,7 @@
 {
   "name": "@devx-icons/react",
-  "version": "1.1.0",
-  "description": "DevX Icons for React: 6,000+ precision line and solid icons with a built-in accent colour.",
+  "version": "1.2.0",
+  "description": "DevX Icons for React: 7,000+ icons in line, solid, duotone and bulk, four weights, built-in animation.",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",

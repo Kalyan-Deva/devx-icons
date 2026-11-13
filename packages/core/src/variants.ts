@@ -12,7 +12,8 @@ export const LOOP_GAP = 1.5;
 
 /** Apply the open-loop signature to stroked parts (filled accent dots stay as they are). */
 export function openLoopParts(parts: Part[]): Part[] {
-  return parts.map((p) => (p.role === "accent-fill" ? p : { ...p, d: openLoopD(p.d, LOOP_GAP + STROKE) }));
+  // The outline opens; the accent stays whole so it always reads as the intact highlight.
+  return parts.map((p) => (p.role !== "line" ? p : { ...p, d: openLoopD(p.d, LOOP_GAP + STROKE) }));
 }
 
 export type CutShape =

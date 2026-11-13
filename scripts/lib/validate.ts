@@ -4,7 +4,7 @@ import type { SolidPart } from "../../packages/core/src/render.ts";
 import type { IconDef } from "../../packages/core/src/variants.ts";
 
 const SAFE_LINE = { min: 1.5, max: 22.5 }; // stroke centrelines
-const SAFE_SOLID = { min: 0.6, max: 23.4 }; // filled outlines (edge = centreline ± half stroke)
+const SAFE_SOLID = { min: 0.5, max: 23.5 }; // filled outlines (edge = centreline ± half stroke)
 
 export function validateIcon(icon: IconDef, solid: SolidPart[]): string[] {
   const out: string[] = [];

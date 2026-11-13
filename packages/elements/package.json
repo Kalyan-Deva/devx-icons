@@ -1,0 +1,47 @@
+{
+  "name": "@devx-icons/elements",
+  "version": "1.2.0",
+  "description": "DevX Icons as a web component: <devx-icon icon=\"home\" variant=\"duotone\" animate>. Works with any framework or none.",
+  "license": "MIT",
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/elements"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "sideEffects": [
+    "./dist/index.js",
+    "./dist/all.js"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./all": {
+      "types": "./dist/all.d.ts",
+      "import": "./dist/all.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "icons",
+    "web-components",
+    "custom-elements",
+    "svg",
+    "devx"
+  ]
+}

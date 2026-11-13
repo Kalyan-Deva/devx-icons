@@ -93,10 +93,10 @@ describe("open loop signature", () => {
     expect(parsePath(openLoopD(C(12, 12, 1.5), 3.25))[0]!.closed).toBe(true);
     expect(openLoopD("M2 12H22", 3.25)).toBe("M2 12L22 12");
   });
-  it("every generated line icon keeps its closed outlines open", async () => {
+  it("every generated line icon opens its outlines (accents stay whole)", async () => {
     const icons = expand(await loadBases());
     for (const i of icons.slice(0, 400)) {
-      for (const p of i.parts.filter((q) => q.role !== "accent-fill" && i.variant === null)) {
+      for (const p of i.parts.filter((q) => q.role === "line" && i.variant === null)) {
         for (const sp of parsePath(p.d)) if (sp.closed) expect(loopGap(sp)).toBeNull();
       }
     }
@@ -156,7 +156,7 @@ describe("the icon set", async () => {
     if (!existsSync(f)) return;
     const cps = Object.values(JSON.parse(readFileSync(f, "utf8")) as Record<string, number>);
     expect(new Set(cps).size).toBe(cps.length);
-    for (const c of cps) expect(c >= 0xe000 && c <= 0xf8ff).toBe(true);
+    for (const c of cps) expect((c >= 0xe000 && c <= 0xf8ff) || (c >= 0xf0000 && c <= 0xffffd)).toBe(true);
   });
 });
 

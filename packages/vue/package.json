@@ -1,0 +1,42 @@
+{
+  "name": "@devx-icons/vue",
+  "version": "1.2.0",
+  "description": "DevX Icons for Vue 3: 7,000+ icons in line, solid, duotone and bulk, four weights, built-in animation.",
+  "license": "MIT",
+  "author": "Kalyan Gopalam",
+  "homepage": "https://github.com/Kalyan-Deva/devx-icons#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kalyan-Deva/devx-icons.git",
+    "directory": "packages/vue"
+  },
+  "bugs": {
+    "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "import": "./dist/icons/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "vue": ">=3"
+  },
+  "keywords": [
+    "icons",
+    "vue",
+    "svg",
+    "devx"
+  ]
+}

@@ -1,58 +1,34 @@
 export {};
-type Row = { n: string; c: string; t: string; v: string | null; l: [0 | 1 | 2, string][]; s: [0 | 1, string][] };
+// @ts-expect-error generated at build time (pnpm generate)
+import { devxSvg } from "./devx-runtime.js";
+
+type Row = { n: string; c: string; t: string; v: string | null; a: [string, number?, number?]; l: [0 | 1 | 2, string][]; s: [0 | 1, string][] };
+type Icon = { name: string; line: Row["l"]; solid: Row["s"]; anim: Row["a"] };
+type Opts = { variant?: string; weight?: string; size?: number; animate?: boolean; title?: string };
+const render = devxSvg as (i: Icon, o?: Opts) => string;
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const q = $<HTMLInputElement>("q");
 const size = $<HTMLInputElement>("size");
-const stroke = $<HTMLInputElement>("stroke");
 const color = $<HTMLInputElement>("color");
 const accent = $<HTMLInputElement>("accent");
+const animate = $<HTMLInputElement>("animate");
 const baseOnly = $<HTMLInputElement>("base-only");
 const grid = $("grid");
 
 const PAGE = 240;
-let style: "line" | "solid" = "line";
+let variant = "line";
+let weight = "regular";
 let category = "all";
 let rows: Row[] = [];
 let shown: Row[] = [];
 let rendered = 0;
 
-const lineSvg = (r: Row, s: number, w: number) =>
-  `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">` +
-  r.l
-    .map(([k, d]) =>
-      k === 0 ? `<path d="${d}"/>` : k === 1 ? `<path d="${d}" class="ac"/>` : `<path d="${d}" class="acf"/>`,
-    )
-    .join("") +
-  `</svg>`;
-
-const solidSvg = (r: Row, s: number) =>
-  `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd">` +
-  r.s.map(([k, d]) => (k ? `<path d="${d}" class="acs"/>` : `<path d="${d}"/>`)).join("") +
-  `</svg>`;
-
-const svgFor = (r: Row, s: number) => (style === "line" ? lineSvg(r, s, Number(stroke.value)) : solidSvg(r, s));
-
-function exportSvg(r: Row): string {
-  const acc = "var(--devx-accent,currentColor)";
-  if (style === "solid")
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd">${r.s
-      .map(([k, d]) => (k ? `<path d="${d}" class="devx-accent" style="fill:${acc}"/>` : `<path d="${d}"/>`))
-      .join("")}</svg>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${stroke.value}" stroke-linecap="round" stroke-linejoin="round">${r.l
-    .map(([k, d]) =>
-      k === 0
-        ? `<path d="${d}"/>`
-        : k === 1
-          ? `<path d="${d}" class="devx-accent" style="stroke:${acc}"/>`
-          : `<path d="${d}" class="devx-accent" style="fill:${acc};stroke:none"/>`,
-    )
-    .join("")}</svg>`;
-}
+const icon = (r: Row): Icon => ({ name: r.n, line: r.l, solid: r.s, anim: r.a });
+const opts = (s: number): Opts => ({ variant, weight, size: s, animate: animate.checked });
 
 function filter() {
-  const term = q.value.trim().toLowerCase();
-  const words = term.split(/\s+/).filter(Boolean);
+  const words = q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
   shown = rows.filter(
     (r) =>
       (category === "all" || r.c === category) &&
@@ -71,19 +47,16 @@ function more() {
   const next = shown.slice(rendered, rendered + PAGE);
   grid.insertAdjacentHTML(
     "beforeend",
-    next
-      .map((r) => `<button class="cell" data-name="${r.n}" title="${r.n}">${svgFor(r, s)}<span>${r.n}</span></button>`)
-      .join(""),
+    next.map((r) => `<button class="cell" data-name="${r.n}" title="${r.n}">${render(icon(r), opts(s))}<span>${r.n}</span></button>`).join(""),
   );
   rendered += next.length;
 }
 
 function knobs() {
   $("size-v").textContent = `${size.value}px`;
-  $("stroke-v").textContent = Number(stroke.value).toFixed(2);
   document.documentElement.style.setProperty("--icon", color.value);
   document.documentElement.style.setProperty("--devx-accent", accent.value);
-  $("stroke-l").classList.toggle("off", style === "solid");
+  $("weight").classList.toggle("off", variant === "solid" || variant === "bulk");
 }
 
 let toastTimer = 0;
@@ -99,28 +72,27 @@ new IntersectionObserver((e) => {
   if (e[0]?.isIntersecting && rendered < shown.length) more();
 }, { rootMargin: "800px" }).observe($("sentinel"));
 
-$("style").addEventListener("click", (e) => {
-  const b = (e.target as HTMLElement).closest("button");
-  if (!b) return;
-  style = b.dataset.s as "line" | "solid";
-  document.querySelectorAll("#style button").forEach((x) => x.classList.toggle("on", x === b));
-  knobs();
-  filter();
-});
-$("cats").addEventListener("click", (e) => {
-  const b = (e.target as HTMLElement).closest("button");
-  if (!b) return;
-  category = b.dataset.c!;
-  document.querySelectorAll("#cats button").forEach((x) => x.classList.toggle("on", x === b));
-  filter();
-});
+function seg(id: string, key: string, set: (v: string) => void) {
+  $(id).addEventListener("click", (e) => {
+    const b = (e.target as HTMLElement).closest("button");
+    if (!b) return;
+    set(b.dataset[key]!);
+    document.querySelectorAll(`#${id} button`).forEach((x) => x.classList.toggle("on", x === b));
+    knobs();
+    filter();
+  });
+}
+seg("style", "s", (v) => (variant = v));
+seg("weight", "w", (v) => (weight = v));
+seg("cats", "c", (v) => (category = v));
+
 grid.addEventListener("click", async (e) => {
   const cell = (e.target as HTMLElement).closest<HTMLElement>(".cell");
   if (!cell) return;
   const r = rows.find((x) => x.n === cell.dataset.name)!;
   try {
-    await navigator.clipboard.writeText(exportSvg(r));
-    toast(`Copied ${r.n}.svg (${style})`);
+    await navigator.clipboard.writeText(render(icon(r), opts(24)));
+    toast(`Copied ${r.n}.svg (${variant}${variant === "line" || variant === "duotone" ? `, ${weight}` : ""}${animate.checked ? ", animated" : ""})`);
   } catch {
     toast("Clipboard not available here");
   }
@@ -130,8 +102,9 @@ q.addEventListener("input", () => {
   clearTimeout(qTimer);
   qTimer = window.setTimeout(filter, 120);
 });
-for (const el of [size, stroke]) el.addEventListener("change", filter);
-for (const el of [size, stroke, color, accent]) el.addEventListener("input", knobs);
+size.addEventListener("change", filter);
+for (const el of [size, color, accent]) el.addEventListener("input", knobs);
+animate.addEventListener("change", filter);
 baseOnly.addEventListener("change", filter);
 
 const res = await fetch(`${import.meta.env.BASE_URL}data.json`);
@@ -146,11 +119,21 @@ $("cats").innerHTML =
 $("count").textContent = `${rows.length.toLocaleString()} icons`;
 $("hero-count").textContent = rows.length.toLocaleString();
 const mark = byName.get("scan-box") ?? rows[0]!;
-$("mark").innerHTML = lineSvg(mark, 20, 1.75);
-$("hero-row").innerHTML = ["home", "bell-dot", "laptop-check", "folder-plus", "lock", "settings", "user-heart", "cloud-upload"]
-  .map((n) => byName.get(n))
-  .filter((r): r is Row => !!r)
-  .map((r) => `<span>${lineSvg(r, 32, 1.75)}</span>`)
+$("mark").innerHTML = render(icon(mark), { size: 20 });
+$("hero-row").innerHTML = (
+  [
+    ["settings", "line"],
+    ["bell-dot", "duotone"],
+    ["shield-check", "solid"],
+    ["malware", "bulk"],
+    ["lattice", "line"],
+    ["cloud-upload", "duotone"],
+    ["key-exchange", "line"],
+    ["heart", "bulk"],
+  ] as const
+)
+  .map(([n, v]) => byName.get(n) && `<span>${render(icon(byName.get(n)!), { size: 32, variant: v, animate: true })}</span>`)
+  .filter(Boolean)
   .join("");
 knobs();
 filter();

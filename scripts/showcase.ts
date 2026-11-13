@@ -16,16 +16,21 @@ const PICK = [
   "play", "volume", "video-call", "trash", "edit-box", "download", "eye-off", "scan-face", "qr-code", "fingerprint", "key", "bug",
 ];
 
-function icon(g: Geo, style: "line" | "solid", x: number, y: number, size: number): string {
+type St = "line" | "solid" | "duotone" | "bulk";
+function icon(g: Geo, style: St, x: number, y: number, size: number, sw = 1.75): string {
   const t = `translate(${x} ${y}) scale(${size / 24})`;
+  if (style === "duotone")
+    return `<g transform="${t}">${g.solid.filter((p) => !p.accent).map((p) => `<path d="${p.d}" fill="${ACC}" fill-opacity="0.2" fill-rule="evenodd"/>`).join("")}</g>` + icon(g, "line", x, y, size, sw);
+  if (style === "bulk")
+    return `<g transform="${t}" fill-rule="evenodd">${g.solid.map((p) => (p.accent ? `<path d="${p.d}" fill="${ACC}"/>` : `<path d="${p.d}" fill="${INK}" fill-opacity="0.35"/>`)).join("")}</g>`;
   if (style === "line")
-    return `<g transform="${t}" fill="none" stroke="${INK}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${g.line
+    return `<g transform="${t}" fill="none" stroke="${INK}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${g.line
       .map((p) => (p.role === "line" ? `<path d="${p.d}"/>` : p.role === "accent" ? `<path d="${p.d}" stroke="${ACC}"/>` : `<path d="${p.d}" fill="${ACC}" stroke="none"/>`))
       .join("")}</g>`;
   return `<g transform="${t}" fill="${INK}" fill-rule="evenodd">${g.solid.map((p) => (p.accent ? `<path d="${p.d}" fill="${ACC}"/>` : `<path d="${p.d}"/>`)).join("")}</g>`;
 }
 
-function grid(names: string[], style: "line" | "solid", cols: number, file: string, size = 32, gap = 40) {
+function grid(names: string[], style: St, cols: number, file: string, size = 32, gap = 40) {
   const items = names.map((n) => geo.get(n)).filter((g): g is Geo => !!g);
   const missing = names.filter((n) => !geo.has(n));
   if (missing.length) console.warn("missing:", missing.join(", "));
@@ -60,10 +65,10 @@ grid(VAR, "solid", 17, "variants-solid", 32, 28);
 <rect width="1280" height="640" fill="#f5f6f8"/>
 <rect x="640" y="70" width="560" height="500" rx="28" fill="#ffffff" stroke="#e6e8ec"/>
 <text x="80" y="250" font-family="Segoe UI, Arial" font-weight="700" font-size="84" fill="#111111">DevX Icons</text>
-<text x="82" y="318" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">6,354 open-source icons</text>
-<text x="82" y="366" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">open-loop line + solid, one accent</text>
+<text x="82" y="318" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">7,418 open-source icons</text>
+<text x="82" y="366" font-family="Segoe UI, Arial" font-size="34" fill="#6b7280">8 styles, open loop, one accent</text>
 <rect x="82" y="420" width="16" height="16" rx="8" fill="#ff5a1f"/>
-<text x="110" y="434" font-family="Segoe UI, Arial" font-size="24" fill="#111111">SVG · Font · React · PNG · ICO · MIT</text>
+<text x="110" y="434" font-family="Segoe UI, Arial" font-size="22" fill="#111111">SVG · Font · React · Vue · Svelte · Iconify · MIT</text>
 ${body}</svg>`;
   const png = new Resvg(svg, { font: { loadSystemFonts: true } }).render().asPng();
   writeFileSync(new URL("docs/images/social-preview.png", ROOT), png);
@@ -71,3 +76,25 @@ ${body}</svg>`;
   writeFileSync(new URL("playground/public/social-preview.png", ROOT), png);
   console.log("docs/images/social-preview.png");
 }
+
+// Styles comparison: one row per style
+{
+  const names = ["home", "settings", "bell-dot", "shield-check", "folder-plus", "malware", "key-exchange", "lattice", "cloud-upload", "heart"];
+  const rows: [string, St, number][] = [["thin", "line", 1], ["light", "line", 1.25], ["regular", "line", 1.75], ["bold", "line", 2.25], ["solid", "solid", 0], ["duotone", "duotone", 1.75], ["bulk", "bulk", 0]];
+  const S = 32, G = 36, L = 130, pad = 32;
+  const W = L + names.length * (S + G) - G + pad * 2;
+  const H = rows.length * (S + 28) - 28 + pad * 2;
+  let body = "";
+  rows.forEach(([label, st, sw], r) => {
+    const y = pad + r * (S + 28);
+    body += `<text x="${pad}" y="${y + 22}" font-family="Segoe UI, Arial" font-size="15" fill="#6b7280">${label}</text>`;
+    names.forEach((n, i) => { const g = geo.get(n); if (g) body += icon(g, st, pad + L + i * (S + G), y, S, sw || 1.75); });
+  });
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="100%" height="100%" rx="20" fill="#ffffff"/>${body}</svg>`;
+  writeFileSync(new URL("docs/images/styles.png", ROOT), new Resvg(svg, { fitTo: { mode: "zoom", value: 2 }, font: { loadSystemFonts: true } }).render().asPng());
+  console.log("docs/images/styles.png");
+}
+// Security showcase
+grid(["malware", "ransomware", "phishing", "hacker", "exploit", "payload", "backdoor", "botnet", "ddos", "sql-injection", "xss", "zero-day",
+  "encryption", "key-exchange", "digital-signature", "hash-function", "certificate-chain", "lattice", "post-quantum", "quantum-shield", "hsm", "tpm", "secure-boot", "one-time-code",
+  "vpn", "proxy", "cluster", "sbom", "supply-chain", "packet", "audit-log", "access-control", "privacy", "siem", "onion-routing", "https"], "line", 12, "security");

@@ -24,9 +24,16 @@ const ICON = 40;
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 
-function icon(g: Geo, style: "line" | "solid", x: number, y: number): string {
+type Style = "line" | "solid" | "duotone" | "bulk";
+function icon(g: Geo, style: Style, x: number, y: number): string {
   const k = ICON / 24;
   const t = `translate(${x} ${y}) scale(${k})`;
+  if (style === "duotone") {
+    const tint = g.solid.filter((p) => p.d && !p.accent).map((p) => `<path d="${p.d}" fill="${ACC}" fill-opacity="0.2" fill-rule="evenodd" stroke="none"/>`).join("");
+    return `<g transform="${t}">${tint}</g>` + icon(g, "line", x, y);
+  }
+  if (style === "bulk")
+    return `<g transform="${t}" fill-rule="evenodd">${g.solid.map((p) => (p.accent ? `<path d="${p.d}" fill="${ACC}"/>` : `<path d="${p.d}" fill="${INK}" fill-opacity="0.35"/>`)).join("")}</g>`;
   if (style === "line")
     return `<g transform="${t}" fill="none" stroke="${INK}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">${g.line
       .map((p) =>
@@ -38,7 +45,7 @@ function icon(g: Geo, style: "line" | "solid", x: number, y: number): string {
     .join("")}</g>`;
 }
 
-function sheet(items: Geo[], style: "line" | "solid", file: string) {
+function sheet(items: Geo[], style: Style, file: string) {
   const rows = Math.ceil(items.length / COLS);
   const W = COLS * CELL;
   const H = rows * CELL;
@@ -68,7 +75,6 @@ if (onlyBase) {
   const cats = [...new Set(Object.values(meta).map((m) => m.category))].filter((c) => !onlyCat || c === onlyCat);
   for (const c of cats) {
     const items = geo.filter((g) => meta[g.name]?.category === c && (all || meta[g.name]?.variant === null));
-    sheet(items, "line", `${c}-line`);
-    sheet(items, "solid", `${c}-solid`);
+    for (const st of (arg("styles") ?? "line,solid").split(",") as Style[]) sheet(items, st, `${c}-${st}`);
   }
 }

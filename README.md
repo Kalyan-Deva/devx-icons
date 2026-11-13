@@ -1,15 +1,36 @@
 # DevX Icons
 
-**6,354 open-source icons in line and solid, with a signature accent colour.**
+**7,418 open-source icons with the open-loop signature: line in four weights, solid, duotone, bulk, and animated.**
 
 [![Download](https://img.shields.io/github/v/release/Kalyan-Deva/devx-icons?label=download&color=ff5a1f)](https://github.com/Kalyan-Deva/devx-icons/releases/latest)
-![Icons](https://img.shields.io/badge/icons-6%2C354-111111)
+![Icons](https://img.shields.io/badge/icons-7%2C418-111111)
+![Styles](https://img.shields.io/badge/styles-8-111111)
 ![License](https://img.shields.io/badge/license-MIT-111111)
 
-**[Browse all 6,354 icons →](https://kalyan-deva.github.io/devx-icons/)** search, switch line/solid, pick your accent colour, click to copy.
+**[Browse all 7,418 icons →](https://kalyan-deva.github.io/devx-icons/)** search, switch style and weight, turn on animation, pick your accent colour, click to copy.
 
+![Every style: thin, light, regular, bold, solid, duotone, bulk](docs/images/styles.png)
 ![DevX Icons, line style](docs/images/showcase-line.png)
 ![DevX Icons, solid style](docs/images/showcase-solid.png)
+
+## Why DevX
+
+- **Open loop, the signature.** Every closed outline opens at 1 o'clock with the same 1.5 px
+  gap; solid, duotone and bulk carry a matching notch. You can spot a DevX icon at a glance.
+- **A built-in accent.** One detail per icon follows `--devx-accent` (falling back to
+  `currentColor`): set one CSS variable and the whole set picks up your brand colour.
+- **Security & infrastructure coverage nobody else has**: threats (malware, phishing,
+  exploit, DDoS, SQL injection, zero-day…), cryptography (key exchange, lattice,
+  post-quantum, HSM, TPM, secure boot…) and infrastructure (VPN, WAF, SBOM, supply chain,
+  SIEM, onion routing…), each with all sixteen variants.
+- **Eight styles from one geometry**, so they always match: line in thin / light / regular /
+  bold, solid, duotone, bulk, and animated.
+- **Motion by rule.** Gears spin, bells swing, hearts beat, arrows nudge in their own
+  direction, badges pop, everything else draws its accent in. Respects `prefers-reduced-motion`.
+- **Every format**: SVG, sprites, icon fonts, React, Vue, Svelte, web component, Iconify,
+  Android, PNG and ICO.
+
+![Security icons](docs/images/security.png)
 
 ## Download
 
@@ -17,97 +38,138 @@ Grab a ready-made pack from the [latest release](https://github.com/Kalyan-Deva/
 
 | Pack | What's inside |
 |---|---|
-| `devx-icons-1.1.0-svg.zip` | every icon as SVG (`line/` + `solid/`), two SVG sprites, `icons.json` |
-| `devx-icons-1.1.0-font.zip` | icon fonts (woff2 + ttf, line + solid) and `devx-icons.css` |
-| `devx-icons-1.1.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128 and 256 px, line + solid |
-| `devx-icons-1.1.0-ico.zip` | one multi-size `.ico` per icon (16 to 256 px), line + solid |
-| `devx-icons-*.tgz` | the npm packages (`devx-icons`, `@devx-icons/font`, `@devx-icons/react`) |
+| `devx-icons-1.2.0-svg.zip` | every icon in `line/ thin/ light/ bold/ solid/ duotone/ bulk/ animated/`, sprites, `icons.json` |
+| `devx-icons-1.2.0-font.zip` | icon fonts: regular, thin, light, bold, solid (+ bulk via CSS), woff2 + ttf, `devx-icons.css` |
+| `devx-icons-1.2.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128, 256 px in line, solid, duotone and bulk |
+| `devx-icons-1.2.0-ico.zip` | one multi-size `.ico` per icon (16–256 px) in line, solid, duotone and bulk |
+| `devx-icons-1.2.0-android.zip` | Android vector drawables, line + solid, theme-coloured |
+| `devx-icons-*.tgz` | npm packages: `devx-icons`, `@devx-icons/font`, `/react`, `/vue`, `/svelte`, `/elements`, `/iconify` |
 
-- **Open loop (the DevX signature):** every closed outline opens at 1 o'clock with the same 1.5 px gap; solid icons carry a matching notch in the same spot, so the set is recognisable at a glance
-- 24 × 24 grid, 2 px padding, 1.75 stroke, round caps and joins, ~3 px corner radius
-- **Accent element:** every multi-part icon has one detail drawn in `var(--devx-accent)`,
-  falling back to `currentColor` — set one CSS variable and every icon gets a second colour
-- **Open gaps:** where a badge or inner element meets an outline, the outline stops short
-  with a clean 1.25 px gap instead of colliding
-- **Line + solid** from the same geometry, so both styles always match
-- Formats: SVG files, SVG sprites, icon font (woff2/ttf), React components, PNG (16–256), ICO
-- MIT licensed
+## Styles
+
+| Style | What it is | Where |
+|---|---|---|
+| line | 1.75 stroke, adjustable | everywhere |
+| thin · light · bold | 1 · 1.25 · 2.25 stroke | SVG folders, fonts, Iconify, `weight` prop |
+| solid | filled bodies, details knocked out, open-loop notch | everywhere |
+| duotone | the line icon over a 20 % accent tint | SVG, sprites, components, Iconify, PNG/ICO |
+| bulk | solid body at 35 %, accent at full strength | SVG, sprites, components, Iconify, font (`devx-bulk`), PNG/ICO |
+| animated | rule-based motion, self-contained CSS | `animated/` SVGs, `animate` prop / attribute |
 
 ## Icons
 
 ![One base icon with its sixteen variants, line](docs/images/variants-line.png)
 ![One base icon with its sixteen variants, solid](docs/images/variants-solid.png)
 
-521 hand-drawn base icons × systematic variants (`-plus`, `-minus`, `-check`, `-x`,
+584 hand-drawn base icons × systematic variants (`-plus`, `-minus`, `-check`, `-x`,
 `-alert`, `-clock`, `-lock`, `-search`, `-star`, `-heart`, `-upload`, `-download`,
-`-edit`, `-bolt`, `-off`, `-dot`) = **6,354 icons** in 20 categories:
+`-edit`, `-bolt`, `-off`, `-dot`) = **7,418 icons** in 23 categories:
 
 | Category | Bases | Icons | | Category | Bases | Icons |
 |---|---:|---:|---|---|---:|---:|
-| actions | 18 | 146 | | health | 16 | 272 |
-| arrows | 62 | 62 | | interface | 41 | 537 |
-| business | 27 | 459 | | maps | 26 | 435 |
-| communication | 23 | 391 | | media | 26 | 298 |
-| development | 25 | 425 | | objects | 27 | 459 |
-| devices | 36 | 612 | | people | 15 | 255 |
-| editor | 32 | 48 | | security | 25 | 425 |
-| files | 30 | 510 | | shapes | 14 | 126 |
-| food | 10 | 170 | | status | 27 | 27 |
-| time | 12 | 204 | | weather | 29 | 493 |
-
-Browse them: `pnpm dev` → http://localhost:3100 (search, line/solid, size, stroke, ink and accent colour, click to copy).
+| actions | 18 | 146 | | interface | 41 | 537 |
+| arrows | 62 | 62 | | maps | 26 | 435 |
+| business | 27 | 459 | | media | 26 | 298 |
+| communication | 23 | 391 | | objects | 27 | 459 |
+| **cryptography** | 18 | 299 | | people | 15 | 255 |
+| development | 25 | 425 | | **security** | 25 | 425 |
+| devices | 36 | 612 | | shapes | 14 | 126 |
+| editor | 32 | 48 | | status | 27 | 27 |
+| files | 30 | 510 | | **threats** | 24 | 408 |
+| food | 10 | 170 | | time | 12 | 204 |
+| health | 16 | 272 | | weather | 29 | 493 |
+| **infrastructure** | 21 | 357 | | | | |
 
 ## Use
 
-Until the packages are on the npm registry, install them straight from the release:
+Until the packages are on the npm registry, install them straight from the release
+(`https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.2.0/<file>.tgz`), e.g.:
 
 ```bash
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-react-1.1.0.tgz
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-1.1.0.tgz
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.1.0/devx-icons-font-1.1.0.tgz
+npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.2.0/devx-icons-react-1.2.0.tgz
 ```
 
 ### React — `@devx-icons/react`
 
 ```tsx
-import { BellDotIcon, HomeIcon, HomeSolidIcon } from "@devx-icons/react";
+import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@devx-icons/react";
 
-<HomeIcon />                                   // 24px, currentColor, 1.75 stroke
-<HomeIcon size={20} strokeWidth={1.5} />
-<HomeSolidIcon color="#111" accent="#ff5a1f" />
-<BellDotIcon title="New notifications" />      // accessible; otherwise aria-hidden
+<HomeIcon />                               // line, 24px, currentColor, regular weight
+<HomeIcon weight="thin" size={20} />       // thin | light | regular | bold (or strokeWidth)
+<HomeDuotoneIcon accent="#ff5a1f" />
+<HomeBulkIcon title="Home" />              // accessible; otherwise aria-hidden
+<SettingsIcon animate />                   // built-in motion (this one spins)
 ```
 
-One component per icon and style (`<Name>Icon`, `<Name>SolidIcon`), tree-shakeable,
-typed. Deep import: `@devx-icons/react/icons/HomeIcon`.
+Four components per icon (`<Name>Icon`, `<Name>SolidIcon`, `<Name>DuotoneIcon`,
+`<Name>BulkIcon`), tree-shakeable and typed.
+
+### Vue — `@devx-icons/vue`
+
+```vue
+<script setup>
+import { DevxIcon, dxHome, dxBellDot } from "@devx-icons/vue";
+</script>
+<template>
+  <DevxIcon :icon="dxHome" variant="duotone" weight="light" />
+  <DevxIcon :icon="dxBellDot" accent="#e11d48" animate />
+</template>
+```
+
+### Svelte — `@devx-icons/svelte`
+
+```svelte
+<script>
+  import { DevxIcon, dxHome } from "@devx-icons/svelte";
+</script>
+<DevxIcon icon={dxHome} variant="bulk" size={28} />
+```
+
+### Web component — `@devx-icons/elements` (any framework, or none)
+
+```html
+<script type="module">
+  import { register, dxHome, dxShieldCheck } from "@devx-icons/elements";
+  register(dxHome, dxShieldCheck);
+</script>
+<devx-icon icon="home" variant="duotone" animate></devx-icon>
+<devx-icon icon="shield-check" variant="solid" size="32" accent="#16a34a"></devx-icon>
+```
+
+`@devx-icons/elements/all` registers every icon at once (large).
+
+### Iconify — `@devx-icons/iconify`
+
+Seven icon sets: `devx`, `devx-thin`, `devx-light`, `devx-bold`, `devx-solid`,
+`devx-duotone`, `devx-bulk` (`json/<prefix>.json`), for Iconify, UnoCSS and Tailwind plugins.
 
 ### SVG — `devx-icons`
 
 ```html
-<img src="node_modules/devx-icons/line/home.svg" width="24" height="24" alt="" />
-```
-
-Inline the SVG to get `currentColor` and the accent variable. `icons.json` lists every
-icon with its category, tags, base and variant.
-
-**Sprite** (one request for all icons):
-
-```html
+<img src="node_modules/devx-icons/duotone/home.svg" width="24" height="24" alt="" />
 <svg width="24" height="24"><use href="devx-icons/sprite/devx-line.svg#devx-home" /></svg>
 ```
 
-The line sprite reads `--devx-stroke-width` (default 1.75).
+Inline SVGs get `currentColor` and the accent variable. The line sprite reads
+`--devx-stroke-width`. `icons.json` lists every icon with category, tags, base, variant and
+animation.
 
 ### Icon font — `@devx-icons/font`
 
 ```html
 <link rel="stylesheet" href="@devx-icons/font/devx-icons.css" />
-<i class="devx devx-home"></i>          <!-- line -->
-<i class="devx-solid devx-home"></i>    <!-- solid -->
+<i class="devx devx-home"></i>           <!-- regular -->
+<i class="devx-thin devx-home"></i>      <!-- also devx-light, devx-bold -->
+<i class="devx-solid devx-home"></i>
+<i class="devx-bulk devx-home"></i>
 ```
 
-The font keeps the signature: each icon's accent is a second glyph layered on top via
-`::after` in `var(--devx-accent)`.
+The accent is a second glyph layered on top via `::after` in `var(--devx-accent)`.
+
+### Android
+
+Copy `line/` or `solid/` drawables from the Android zip into `res/drawable/`. Ink follows
+`?attr/colorControlNormal`, the accent follows `?attr/colorAccent`.
 
 ### Accent colour (all formats)
 
@@ -119,9 +181,8 @@ The font keeps the signature: each icon's accent is a second glyph layered on to
 
 ### PNG and ICO
 
-`release/devx-icons-<v>-png.zip` has every icon at 16, 24, 32, 48, 64, 128 and 256 px;
-`…-ico.zip` has one multi-size `.ico` per icon. Default ink `#111111`, accent `#ff5a1f`;
-re-render with your colours:
+Every icon in line, solid, duotone and bulk at 16–256 px, plus one multi-size `.ico` each.
+Default ink `#111111`, accent `#ff5a1f`; re-render with your colours:
 
 ```bash
 pnpm build:raster --ink=#ffffff --accent=#22d3ee
@@ -131,30 +192,31 @@ pnpm build:raster --ink=#ffffff --accent=#22d3ee
 
 ```bash
 pnpm install
-pnpm build          # generate SVGs (line + solid), fonts, sprites, React package
+pnpm build          # generate all styles, fonts, sprites, React/Vue/Svelte/elements/Iconify, Android
 pnpm build:raster   # PNG + ICO
 pnpm release        # zips + npm tarballs in release/ (nothing is published)
 pnpm check          # typecheck + tests
-pnpm sheets         # QA contact sheets in build/sheets/
+pnpm sheets         # QA contact sheets in build/sheets/ (--styles=line,solid,duotone,bulk)
 ```
 
 ### How it works
 
 - `source/<category>.ts` — the hand-drawn base icons in a small DSL (`C` circle, `R` rect,
   `P` polyline, `a()` accent, `dirs()` four rotations, `mirror()`).
-- `packages/core` — exact path geometry (arc → cubic, Bézier splitting), the variant
-  badges and the gap cut, SVG rendering. Browser-safe, no dependencies.
-- `scripts/generate.ts` — expands bases × variants, builds the **solid** style with Skia
-  PathKit booleans (bodies filled, inner details knocked out, accent in its own gap ring),
-  refits outlines to compact cubics, validates every icon.
-- `scripts/build-font.ts` — two fonts with stable code points (`packages/font/codepoints.json`,
-  keep it committed): base glyphs at U+E000…, accent glyphs at U+F0000….
+- `packages/core` — exact path geometry (arc → cubic, Bézier splitting), the open-loop cut,
+  variant badges and gap cuts, motion rules, SVG rendering. Browser-safe, no dependencies.
+- `scripts/generate.ts` — expands bases × variants, builds solid with Skia PathKit booleans,
+  refits outlines to compact cubics, validates every icon, writes all eight styles.
+- `scripts/lib/runtime.js` — one tiny renderer shared by React, Vue, Svelte, the web component
+  and the site, so every format draws identical SVG.
+- `scripts/build-font.ts` — five fonts with stable code points (`packages/font/codepoints.json`,
+  keep it committed): base glyphs in U+E000… then U+F0000…, accent glyphs in U+100000….
 
 ## Adding an icon
 
-Add an entry to the right `source/*.ts` file, run `pnpm build`, check it in the preview
-and in `pnpm sheets`. The generator fails on name collisions, empty shapes and anything
-outside the safe area.
+Add an entry to the right `source/*.ts` file, run `pnpm check-names` and `pnpm build`, and
+check it in the preview and in `pnpm sheets`. The generator fails on name collisions, empty
+shapes and anything outside the safe area.
 
 ## License
 

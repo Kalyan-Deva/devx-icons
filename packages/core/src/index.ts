@@ -8,6 +8,7 @@ export * from "./geom.js";
 export * from "./dsl.js";
 export * from "./variants.js";
 export * from "./render.js";
+export * from "./anim.js";
 
 /** DevX house style: 24px grid, 1.75 stroke, round caps and joins. */
 export const DEFAULTS = { size: 24, strokeWidth: 1.75 } as const;

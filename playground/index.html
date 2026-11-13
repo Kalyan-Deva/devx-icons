@@ -24,9 +24,9 @@
     </header>
 
     <section class="hero wrap">
-      <h1>Precise icons with a signature accent</h1>
+      <h1>Open-loop icons with a signature accent</h1>
       <p>
-        <span id="hero-count">Thousands of</span> icons in line and solid. A 24px grid, 1.75 stroke and rounded corners,
+        <span id="hero-count">Thousands of</span> icons in line (four weights), solid, duotone and bulk, all animatable. A 24px grid, rounded corners,
         every outline open at 1 o'clock (the DevX signature), and one accent element per icon that follows
         <code>--devx-accent</code>.
       </p>
@@ -53,10 +53,18 @@ line + solid, one .ico per icon</pre></article>
       <div class="seg" id="style">
         <button data-s="line" class="on">Line</button>
         <button data-s="solid">Solid</button>
+        <button data-s="duotone">Duotone</button>
+        <button data-s="bulk">Bulk</button>
+      </div>
+      <div class="seg" id="weight">
+        <button data-w="thin">Thin</button>
+        <button data-w="light">Light</button>
+        <button data-w="regular" class="on">Regular</button>
+        <button data-w="bold">Bold</button>
       </div>
       <div class="knobs">
         <label>Size <input id="size" type="range" min="16" max="48" step="4" value="28" /><b id="size-v"></b></label>
-        <label id="stroke-l">Stroke <input id="stroke" type="range" min="1" max="2.5" step="0.25" value="1.75" /><b id="stroke-v"></b></label>
+        <label class="check"><input id="animate" type="checkbox" /> Animate</label>
         <label class="swatch">Ink <input id="color" type="color" value="#111111" /></label>
         <label class="swatch">Accent <input id="accent" type="color" value="#ff5a1f" /></label>
         <label class="check"><input id="base-only" type="checkbox" /> Bases only</label>

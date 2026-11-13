@@ -56,7 +56,9 @@ function generate(pts: V[], u: number[], t1: V, t2: V): Bez {
   let alpha2 = det ? (c00 * x1 - c01 * x0) / det : 0;
   const segLen = dist(first, last);
   const eps = 1e-6 * segLen;
-  if (alpha1 < eps || alpha2 < eps) alpha1 = alpha2 = segLen / 3;
+  // Degenerate or runaway solutions (near-parallel tangents) fall back to the safe heuristic.
+  const bad = (a: number) => !Number.isFinite(a) || a < eps || a > segLen * 2;
+  if (bad(alpha1) || bad(alpha2)) alpha1 = alpha2 = segLen / 3;
   return [first, add(first, mul(t1, alpha1)), add(last, mul(t2, alpha2)), last];
 }
 

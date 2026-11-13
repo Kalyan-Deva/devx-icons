@@ -14,3 +14,14 @@ packages/react/dist/
 packages/*/LICENSE
 playground/public/data.json
 site/
+playground/src/devx-runtime.js
+packages/svg/thin/
+packages/svg/light/
+packages/svg/bold/
+packages/svg/duotone/
+packages/svg/bulk/
+packages/svg/animated/
+packages/vue/dist/
+packages/svelte/dist/
+packages/elements/dist/
+packages/iconify/json/

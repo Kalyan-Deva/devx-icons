@@ -2,7 +2,8 @@
 //   release/devx-icons-<v>-svg.zip    line + solid SVGs, sprites, icons.json
 //   release/devx-icons-<v>-font.zip   woff2 + ttf + css + codepoints
 //   release/devx-icons-<v>-png.zip    PNG 16–256 (line + solid)
-//   release/devx-icons-<v>-ico.zip    multi-size ICO (line + solid)
+//   release/devx-icons-<v>-ico.zip    multi-size ICO (line, solid, duotone, bulk)
+//   release/devx-icons-<v>-android.zip Android vector drawables
 //   release/npm/*.tgz                 npm pack of devx-icons, @devx-icons/font, @devx-icons/react
 import { execFileSync, execSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
@@ -32,8 +33,9 @@ const docs = (dir: string, what: string) => {
 };
 
 console.log("packing release…");
-docs(`${stage}/svg`, "SVG (line/, solid/, sprite/, icons.json)");
-for (const d of ["line", "solid", "sprite"]) cpSync(`${root}/packages/svg/${d}`, `${stage}/svg/${d}`, { recursive: true });
+const SVG_DIRS = ["line", "thin", "light", "bold", "solid", "duotone", "bulk", "animated", "sprite"];
+docs(`${stage}/svg`, "SVG: line/ thin/ light/ bold/ solid/ duotone/ bulk/ animated/ sprite/ icons.json");
+for (const d of SVG_DIRS) cpSync(`${root}/packages/svg/${d}`, `${stage}/svg/${d}`, { recursive: true });
 cpSync(`${root}/packages/svg/icons.json`, `${stage}/svg/icons.json`);
 zip("svg", `${stage}/svg`, ["."]);
 
@@ -43,13 +45,18 @@ for (const f of ["devx-icons.css", "codepoints.json"]) cpSync(`${root}/packages/
 zip("font", `${stage}/font`, ["."]);
 
 if (existsSync(`${root}/dist/raster/png`)) {
-  docs(`${root}/dist/raster/png`, "PNG at 16/24/32/48/64/128/256 (line/, solid/)");
+  docs(`${root}/dist/raster/png`, "PNG at 16/24/32/48/64/128/256 (line/, solid/, duotone/, bulk/)");
   zip("png", `${root}/dist/raster/png`, ["."]);
-  docs(`${root}/dist/raster/ico`, "ICO with 16–256 px in each file (line/, solid/)");
+  docs(`${root}/dist/raster/ico`, "ICO with 16–256 px in each file (line/, solid/, duotone/, bulk/)");
   zip("ico", `${root}/dist/raster/ico`, ["."]);
 } else console.log("  (no dist/raster yet — run pnpm build:raster for PNG/ICO zips)");
 
-for (const p of ["svg", "font", "react"]) {
+if (existsSync(`${root}/dist/android`)) {
+  docs(`${root}/dist/android`, "Android vector drawables (line/, solid/). Ink = ?attr/colorControlNormal, accent = ?attr/colorAccent");
+  zip("android", `${root}/dist/android`, ["."]);
+}
+
+for (const p of ["svg", "font", "react", "vue", "svelte", "elements", "iconify"]) {
   cpSync(`${root}/LICENSE`, `${root}/packages/${p}/LICENSE`);
   execSync(`pnpm pack --pack-destination "${out}/npm"`, { cwd: `${root}/packages/${p}`, stdio: "ignore" });
 }

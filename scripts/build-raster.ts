@@ -7,10 +7,11 @@ import { cpus } from "node:os";
 import { fileURLToPath } from "node:url";
 import { Worker, isMainThread, parentPort, workerData } from "node:worker_threads";
 import { Resvg } from "@resvg/resvg-js";
-import { renderLineSvg, renderSolidSvg, type SolidPart } from "../packages/core/src/render.ts";
+import { renderBulkSvg, renderDuotoneSvg, renderLineSvg, renderSolidSvg, type SolidPart } from "../packages/core/src/render.ts";
 import type { Part } from "../packages/core/src/dsl.ts";
 
 const SIZES = [16, 24, 32, 48, 64, 128, 256];
+const STYLES = ["line", "solid", "duotone", "bulk"] as const;
 type Geo = { name: string; line: Part[]; solid: SolidPart[] };
 type Job = { root: string; ink: string; accent: string; items: Geo[] };
 
@@ -39,11 +40,16 @@ function ico(pngs: { size: number; data: Buffer }[]): Buffer {
 function work(job: Job): number {
   let n = 0;
   for (const g of job.items) {
-    for (const style of ["line", "solid"] as const) {
+    for (const style of STYLES) {
+      const o = { color: job.ink, accent: job.accent };
       const svg =
         style === "line"
-          ? renderLineSvg(g.line, { color: job.ink, accent: job.accent })
-          : renderSolidSvg(g.solid, { color: job.ink, accent: job.accent });
+          ? renderLineSvg(g.line, o)
+          : style === "solid"
+            ? renderSolidSvg(g.solid, o)
+            : style === "duotone"
+              ? renderDuotoneSvg(g.line, g.solid, o)
+              : renderBulkSvg(g.solid, o);
       const pngs = SIZES.map((size) => ({
         size,
         data: Buffer.from(new Resvg(svg, { fitTo: { mode: "width", value: size }, shapeRendering: 2, font: { loadSystemFonts: false } }).render().asPng()),
@@ -66,7 +72,7 @@ if (!isMainThread) {
   let geo: Geo[] = JSON.parse(readFileSync(`${root}/build/geometry.json`, "utf8"));
   if (arg("limit")) geo = geo.slice(0, Number(arg("limit")));
   rmSync(`${root}/dist/raster`, { recursive: true, force: true });
-  for (const style of ["line", "solid"]) {
+  for (const style of STYLES) {
     for (const s of SIZES) mkdirSync(`${root}/dist/raster/png/${style}/${s}`, { recursive: true });
     mkdirSync(`${root}/dist/raster/ico/${style}`, { recursive: true });
   }

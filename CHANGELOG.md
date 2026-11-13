@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.2.0 — 2026-11-12
+
+Security icons, five new styles and five new formats.
+
+- **63 new security icons** in three new categories — threats, cryptography,
+  infrastructure — with all variants: 1,064 more icons, 7,418 in total.
+- **Styles:** line in thin (1), light (1.25), regular (1.75) and bold (2.25); duotone
+  (line over a 20 % accent tint); bulk (35 % body, full accent); animated (rule-based
+  motion: spin, swing, beat, nudge, pulse, pop, draw; honours reduced motion).
+- **Formats:** `@devx-icons/vue`, `@devx-icons/svelte`, `@devx-icons/elements`
+  (`<devx-icon>`), `@devx-icons/iconify` (7 sets), Android vector drawables.
+- React: `<Name>DuotoneIcon`, `<Name>BulkIcon`, `weight` and `animate` props.
+- Fonts: thin, light and bold families, plus a `devx-bulk` class. Code points now continue
+  into Plane 15 (existing ones unchanged); accent glyphs moved to Plane 16.
+- PNG/ICO now also in duotone and bulk. Sprites for duotone and bulk.
+- The open-loop cut now applies to outlines only; accents stay whole.
+- Fixed: the curve fitter could produce a runaway control point on near-parallel tangents.
+
 ## 1.1.0 — 2026-11-12
 
 The DevX signature: **open loop**.
