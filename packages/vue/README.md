@@ -1,11 +1,11 @@
-# @devx-icons/vue
+# @kalyan-dev/devx-icons-vue
 
 7,418 DevX Icons for Vue 3: line in four weights, solid, duotone, bulk, and built-in animation.
 Every outline opens at 1 o'clock (the DevX signature) and one detail per icon follows `--devx-accent`.
 
 ```vue
 <script setup>
-import { DevxIcon, dxHome, dxShieldCheck } from "@devx-icons/vue";
+import { DevxIcon, dxHome, dxShieldCheck } from "@kalyan-dev/devx-icons-vue";
 </script>
 <template>
   <DevxIcon :icon="dxHome" />

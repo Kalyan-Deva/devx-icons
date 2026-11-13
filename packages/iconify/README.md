@@ -1,4 +1,4 @@
-# @devx-icons/iconify
+# @kalyan-dev/devx-icons-iconify
 
 DevX Icons as Iconify JSON icon sets, for Iconify, UnoCSS (`preset-icons`), Tailwind plugins and anything else that reads Iconify JSON.
 

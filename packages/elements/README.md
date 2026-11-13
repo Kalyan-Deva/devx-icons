@@ -1,10 +1,10 @@
-# @devx-icons/elements
+# @kalyan-dev/devx-icons-elements
 
 DevX Icons as a web component. Works in any framework, or none.
 
 ```html
 <script type="module">
-  import { register, dxHome, dxShieldCheck } from "@devx-icons/elements";
+  import { register, dxHome, dxShieldCheck } from "@kalyan-dev/devx-icons-elements";
   register(dxHome, dxShieldCheck);
 </script>
 
@@ -13,6 +13,6 @@ DevX Icons as a web component. Works in any framework, or none.
 ```
 
 Attributes: `icon`, `variant`, `weight`, `size`, `color`, `stroke-width`, `accent`, `label` (accessible name), `animate`.
-`import "@devx-icons/elements/all"` registers all 7,418 icons at once (large).
+`import "@kalyan-dev/devx-icons-elements/all"` registers all 7,418 icons at once (large).
 
 [Browse all icons](https://kalyan-deva.github.io/devx-icons/) · [GitHub](https://github.com/Kalyan-Deva/devx-icons) · MIT

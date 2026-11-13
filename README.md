@@ -43,7 +43,7 @@ Grab a ready-made pack from the [latest release](https://github.com/Kalyan-Deva/
 | `devx-icons-1.2.0-png.zip` | PNG at 16, 24, 32, 48, 64, 128, 256 px in line, solid, duotone and bulk |
 | `devx-icons-1.2.0-ico.zip` | one multi-size `.ico` per icon (16–256 px) in line, solid, duotone and bulk |
 | `devx-icons-1.2.0-android.zip` | Android vector drawables, line + solid, theme-coloured |
-| `devx-icons-*.tgz` | npm packages: `devx-icons`, `@devx-icons/font`, `/react`, `/vue`, `/svelte`, `/elements`, `/iconify` |
+| `kalyan-dev-devx-icons-*.tgz` | the npm packages as tarballs: `@kalyan-dev/devx-icons` and `-font`, `-react`, `-vue`, `-svelte`, `-elements`, `-iconify` |
 
 ## Styles
 
@@ -82,17 +82,20 @@ Grab a ready-made pack from the [latest release](https://github.com/Kalyan-Deva/
 
 ## Use
 
-Until the packages are on the npm registry, install them straight from the release
-(`https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.2.0/<file>.tgz`), e.g.:
-
 ```bash
-npm i https://github.com/Kalyan-Deva/devx-icons/releases/download/v1.2.0/devx-icons-react-1.2.0.tgz
+npm i @kalyan-dev/devx-icons-react      # React
+npm i @kalyan-dev/devx-icons-vue        # Vue 3
+npm i @kalyan-dev/devx-icons-svelte     # Svelte
+npm i @kalyan-dev/devx-icons-elements   # <devx-icon> web component
+npm i @kalyan-dev/devx-icons-font       # icon font
+npm i @kalyan-dev/devx-icons-iconify    # Iconify JSON
+npm i @kalyan-dev/devx-icons            # raw SVGs + sprites
 ```
 
-### React — `@devx-icons/react`
+### React — `@kalyan-dev/devx-icons-react`
 
 ```tsx
-import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@devx-icons/react";
+import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@kalyan-dev/devx-icons-react";
 
 <HomeIcon />                               // line, 24px, currentColor, regular weight
 <HomeIcon weight="thin" size={20} />       // thin | light | regular | bold (or strokeWidth)
@@ -104,11 +107,11 @@ import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } 
 Four components per icon (`<Name>Icon`, `<Name>SolidIcon`, `<Name>DuotoneIcon`,
 `<Name>BulkIcon`), tree-shakeable and typed.
 
-### Vue — `@devx-icons/vue`
+### Vue — `@kalyan-dev/devx-icons-vue`
 
 ```vue
 <script setup>
-import { DevxIcon, dxHome, dxBellDot } from "@devx-icons/vue";
+import { DevxIcon, dxHome, dxBellDot } from "@kalyan-dev/devx-icons-vue";
 </script>
 <template>
   <DevxIcon :icon="dxHome" variant="duotone" weight="light" />
@@ -116,37 +119,37 @@ import { DevxIcon, dxHome, dxBellDot } from "@devx-icons/vue";
 </template>
 ```
 
-### Svelte — `@devx-icons/svelte`
+### Svelte — `@kalyan-dev/devx-icons-svelte`
 
 ```svelte
 <script>
-  import { DevxIcon, dxHome } from "@devx-icons/svelte";
+  import { DevxIcon, dxHome } from "@kalyan-dev/devx-icons-svelte";
 </script>
 <DevxIcon icon={dxHome} variant="bulk" size={28} />
 ```
 
-### Web component — `@devx-icons/elements` (any framework, or none)
+### Web component — `@kalyan-dev/devx-icons-elements` (any framework, or none)
 
 ```html
 <script type="module">
-  import { register, dxHome, dxShieldCheck } from "@devx-icons/elements";
+  import { register, dxHome, dxShieldCheck } from "@kalyan-dev/devx-icons-elements";
   register(dxHome, dxShieldCheck);
 </script>
 <devx-icon icon="home" variant="duotone" animate></devx-icon>
 <devx-icon icon="shield-check" variant="solid" size="32" accent="#16a34a"></devx-icon>
 ```
 
-`@devx-icons/elements/all` registers every icon at once (large).
+`@kalyan-dev/devx-icons-elements/all` registers every icon at once (large).
 
-### Iconify — `@devx-icons/iconify`
+### Iconify — `@kalyan-dev/devx-icons-iconify`
 
 Seven icon sets: `devx`, `devx-thin`, `devx-light`, `devx-bold`, `devx-solid`,
 `devx-duotone`, `devx-bulk` (`json/<prefix>.json`), for Iconify, UnoCSS and Tailwind plugins.
 
-### SVG — `devx-icons`
+### SVG — `@kalyan-dev/devx-icons`
 
 ```html
-<img src="node_modules/devx-icons/duotone/home.svg" width="24" height="24" alt="" />
+<img src="node_modules/@kalyan-dev/devx-icons/duotone/home.svg" width="24" height="24" alt="" />
 <svg width="24" height="24"><use href="devx-icons/sprite/devx-line.svg#devx-home" /></svg>
 ```
 
@@ -154,10 +157,10 @@ Inline SVGs get `currentColor` and the accent variable. The line sprite reads
 `--devx-stroke-width`. `icons.json` lists every icon with category, tags, base, variant and
 animation.
 
-### Icon font — `@devx-icons/font`
+### Icon font — `@kalyan-dev/devx-icons-font`
 
 ```html
-<link rel="stylesheet" href="@devx-icons/font/devx-icons.css" />
+<link rel="stylesheet" href="@kalyan-dev/devx-icons-font/devx-icons.css" />
 <i class="devx devx-home"></i>           <!-- regular -->
 <i class="devx-thin devx-home"></i>      <!-- also devx-light, devx-bold -->
 <i class="devx-solid devx-home"></i>

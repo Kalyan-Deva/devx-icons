@@ -1,9 +1,9 @@
-# @devx-icons/font
+# @kalyan-dev/devx-icons-font
 
 DevX Icons as web fonts: regular, thin, light, bold and solid, plus a bulk mode. The accent colour is included.
 
 ```html
-<link rel="stylesheet" href="node_modules/@devx-icons/font/devx-icons.css" />
+<link rel="stylesheet" href="node_modules/@kalyan-dev/devx-icons-font/devx-icons.css" />
 <i class="devx devx-home"></i>
 <i class="devx-thin devx-home"></i>   <!-- devx-light, devx-bold -->
 <i class="devx-solid devx-bell-dot"></i>

@@ -4,7 +4,7 @@
 //   release/devx-icons-<v>-png.zip    PNG 16–256 (line + solid)
 //   release/devx-icons-<v>-ico.zip    multi-size ICO (line, solid, duotone, bulk)
 //   release/devx-icons-<v>-android.zip Android vector drawables
-//   release/npm/*.tgz                 npm pack of devx-icons, @devx-icons/font, @devx-icons/react
+//   release/npm/*.tgz                 npm pack of devx-icons, @kalyan-dev/devx-icons-font, @kalyan-dev/devx-icons-react
 import { execFileSync, execSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";

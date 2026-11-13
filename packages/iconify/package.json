@@ -1,5 +1,5 @@
 {
-  "name": "@devx-icons/iconify",
+  "name": "@kalyan-dev/devx-icons-iconify",
   "version": "1.2.0",
   "description": "DevX Icons as Iconify JSON sets: devx, devx-thin, devx-light, devx-bold, devx-solid, devx-duotone, devx-bulk.",
   "license": "MIT",
@@ -25,5 +25,8 @@
     "iconify",
     "json",
     "devx"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

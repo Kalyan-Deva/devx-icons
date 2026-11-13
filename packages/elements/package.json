@@ -1,5 +1,5 @@
 {
-  "name": "@devx-icons/elements",
+  "name": "@kalyan-dev/devx-icons-elements",
   "version": "1.2.0",
   "description": "DevX Icons as a web component: <devx-icon icon=\"home\" variant=\"duotone\" animate>. Works with any framework or none.",
   "license": "MIT",
@@ -43,5 +43,8 @@
     "custom-elements",
     "svg",
     "devx"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

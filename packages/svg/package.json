@@ -1,5 +1,5 @@
 {
-  "name": "devx-icons",
+  "name": "@kalyan-dev/devx-icons",
   "version": "1.2.0",
   "description": "7,000+ open-source SVG icons: line (thin, light, regular, bold), solid, duotone, bulk and animated, with the open-loop signature and an accent colour.",
   "license": "MIT",
@@ -34,5 +34,8 @@
   },
   "bugs": {
     "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

@@ -47,8 +47,8 @@ Name collisions between a base and a generated variant fail the build.
 | Package / file | Contents |
 |---|---|
 | `packages/svg` → `devx-icons` | line/, solid/, sprite/, icons.json |
-| `packages/font` → `@devx-icons/font` | woff2 + ttf (line, solid), css, codepoints.json |
-| `packages/react` → `@devx-icons/react` | `<Name>Icon` / `<Name>SolidIcon`, typed, tree-shakeable |
+| `packages/font` → `@kalyan-dev/devx-icons-font` | woff2 + ttf (line, solid), css, codepoints.json |
+| `packages/react` → `@kalyan-dev/devx-icons-react` | `<Name>Icon` / `<Name>SolidIcon`, typed, tree-shakeable |
 | `dist/raster` | PNG 16–256, ICO (all sizes per file) |
 | `release/` | zips + npm tarballs |
 
@@ -65,5 +65,5 @@ re-oriented for the non-zero rule. `codepoints.json` is committed for stability.
 
 ## Not done (needs Kalyan)
 
-- Publishing to npm (`devx-icons`, `@devx-icons/font`, `@devx-icons/react`), GitHub repo,
+- Publishing to npm (`devx-icons`, `@kalyan-dev/devx-icons-font`, `@kalyan-dev/devx-icons-react`), GitHub repo,
   docs-site deploy.

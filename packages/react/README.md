@@ -1,9 +1,9 @@
-# @devx-icons/react
+# @kalyan-dev/devx-icons-react
 
 7,418 DevX Icons for React: line in four weights, solid, duotone, bulk, and built-in animation.
 
 ```tsx
-import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@devx-icons/react";
+import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } from "@kalyan-dev/devx-icons-react";
 
 <HomeIcon weight="light" size={20} />
 <HomeDuotoneIcon accent="#ff5a1f" />

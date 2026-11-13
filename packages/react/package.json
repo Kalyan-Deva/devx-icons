@@ -1,5 +1,5 @@
 {
-  "name": "@devx-icons/react",
+  "name": "@kalyan-dev/devx-icons-react",
   "version": "1.2.0",
   "description": "DevX Icons for React: 7,000+ icons in line, solid, duotone and bulk, four weights, built-in animation.",
   "license": "MIT",
@@ -44,5 +44,8 @@
   },
   "bugs": {
     "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

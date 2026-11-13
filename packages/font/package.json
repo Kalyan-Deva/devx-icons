@@ -1,5 +1,5 @@
 {
-  "name": "@devx-icons/font",
+  "name": "@kalyan-dev/devx-icons-font",
   "version": "1.2.0",
   "description": "DevX Icons as a web font (line + solid) with the built-in accent colour.",
   "license": "MIT",
@@ -25,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/Kalyan-Deva/devx-icons/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

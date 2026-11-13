@@ -1,5 +1,5 @@
 {
-  "name": "@devx-icons/vue",
+  "name": "@kalyan-dev/devx-icons-vue",
   "version": "1.2.0",
   "description": "DevX Icons for Vue 3: 7,000+ icons in line, solid, duotone and bulk, four weights, built-in animation.",
   "license": "MIT",
@@ -38,5 +38,8 @@
     "vue",
     "svg",
     "devx"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

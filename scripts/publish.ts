@@ -1,6 +1,6 @@
 // Publishes the packed release tarballs (release/npm/*.tgz) to npm, in dependency-free order.
-// Prereqs: `npm login`, and the free npm organisation "devx-icons" (npmjs.com/org/create)
-// for the @devx-icons/* scope. Pass --dry-run to check without publishing.
+// Prereqs: `npm login` as a member of the kalyan-dev organisation.
+// Packages publish under the @kalyan-dev organisation. Pass --dry-run to check without publishing.
 // npm may ask for a one-time password if 2FA is on: pass --otp=123456.
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
@@ -12,7 +12,7 @@ const dry = process.argv.includes("--dry-run");
 const otp = process.argv.find((a) => a.startsWith("--otp="));
 const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 
-const order = ["devx-icons", "devx-icons-font", "devx-icons-iconify", "devx-icons-react", "devx-icons-vue", "devx-icons-svelte", "devx-icons-elements"];
+const order = ["", "-font", "-iconify", "-react", "-vue", "-svelte", "-elements"].map((s) => `kalyan-dev-devx-icons${s}`);
 const run = (args: string[]) => execFileSync(npm, args, { stdio: "pipe", shell: process.platform === "win32" }).toString().trim();
 
 try {
