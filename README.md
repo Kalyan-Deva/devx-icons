@@ -5,6 +5,7 @@
 [![Download](https://img.shields.io/github/v/release/Kalyan-Deva/devx-icons?label=download&color=ff5a1f)](https://github.com/Kalyan-Deva/devx-icons/releases/latest)
 ![Icons](https://img.shields.io/badge/icons-7%2C418-111111)
 ![Styles](https://img.shields.io/badge/styles-8-111111)
+[![npm](https://img.shields.io/npm/v/@kalyan-dev/devx-icons-react?label=npm&color=cb3837)](https://www.npmjs.com/package/@kalyan-dev/devx-icons-react)
 ![License](https://img.shields.io/badge/license-MIT-111111)
 
 **[Browse all 7,418 icons →](https://kalyan-deva.github.io/devx-icons/)** search, switch style and weight, turn on animation, pick your accent colour, click to copy.
@@ -105,7 +106,7 @@ import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } 
 ```
 
 Four components per icon (`<Name>Icon`, `<Name>SolidIcon`, `<Name>DuotoneIcon`,
-`<Name>BulkIcon`), tree-shakeable and typed.
+`<Name>BulkIcon`), tree-shakeable and typed. Deep import: `@kalyan-dev/devx-icons-react/icons/Home`.
 
 ### Vue — `@kalyan-dev/devx-icons-vue`
 

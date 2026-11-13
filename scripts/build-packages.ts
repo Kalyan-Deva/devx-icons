@@ -181,29 +181,35 @@ export type DevxIcon = ForwardRefExoticComponent<DevxIconProps & RefAttributes<S
     ["Duotone", "duotone"],
     ["Bulk", "bulk"],
   ];
+  // One module per icon holding its data and all four style components. (One file per
+  // component meant 66k files, which the npm registry rejects as "Too many files".)
   const js: string[] = [];
   const dts: string[] = [];
   for (const g of geo) {
     const P = pascal(g.name);
-    write(dist, `data/${P}.js`, dataJs(g));
-    for (const [suffix, variant] of STYLES) {
-      const comp = `${P}${suffix}Icon`;
-      write(
-        dist,
-        `icons/${comp}.js`,
-        `import { createElement as h, forwardRef } from "react";
+    const comps = STYLES.map(([suffix, variant]) => [`${P}${suffix}Icon`, variant] as const);
+    write(
+      dist,
+      `icons/${P}.js`,
+      `import { createElement as h, forwardRef } from "react";
 import { DevxSvg } from "../base.js";
-import d from "../data/${P}.js";
-const ${comp} = /*#__PURE__*/ forwardRef((props, ref) => h(DevxSvg, { ...props, ref, icon: d, variant: "${variant}" }));
-${comp}.displayName = "${comp}";
-export { ${comp} };
-export default ${comp};
-`,
-      );
-      write(dist, `icons/${comp}.d.ts`, `import type { DevxIcon } from "../types";\ndeclare const ${comp}: DevxIcon;\nexport { ${comp} };\nexport default ${comp};\n`);
-      js.push(`export { ${comp} } from "./icons/${comp}.js";`);
-      dts.push(`export { ${comp} } from "./icons/${comp}";`);
-    }
+const d = ${JSON.stringify(plain(g))};
+` +
+        comps
+          .map(
+            ([c, variant]) =>
+              `export const ${c} = /*#__PURE__*/ forwardRef((props, ref) => h(DevxSvg, { ...props, ref, icon: d, variant: "${variant}" }));\n${c}.displayName = "${c}";`,
+          )
+          .join("\n") +
+        `\nexport default ${comps[0]![0]};\n`,
+    );
+    write(
+      dist,
+      `icons/${P}.d.ts`,
+      `import type { DevxIcon } from "../types";\n${comps.map(([c]) => `export declare const ${c}: DevxIcon;`).join("\n")}\nexport default ${comps[0]![0]};\n`,
+    );
+    js.push(`export { ${comps.map(([c]) => c).join(", ")} } from "./icons/${P}.js";`);
+    dts.push(`export { ${comps.map(([c]) => c).join(", ")} } from "./icons/${P}";`);
   }
   write(dist, "index.js", `export { DevxSvg } from "./base.js";\n` + js.join("\n") + "\n");
   write(dist, "index.d.ts", `export type { DevxIcon, DevxIconProps } from "./types";\n` + dts.join("\n") + "\n");

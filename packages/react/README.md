@@ -12,6 +12,6 @@ import { HomeIcon, HomeSolidIcon, HomeDuotoneIcon, HomeBulkIcon, SettingsIcon } 
 ```
 
 Props: `size`, `color`, `weight` (`thin` | `light` | `regular` | `bold`), `strokeWidth`, `accent`, `title`, `animate`, plus any SVG prop.
-Four components per icon, tree-shakeable (`sideEffects: false`), typed.
+Four components per icon, tree-shakeable (`sideEffects: false`), typed. Deep import: `@kalyan-dev/devx-icons-react/icons/Home`.
 
 [Browse all icons](https://kalyan-deva.github.io/devx-icons/) · [GitHub](https://github.com/Kalyan-Deva/devx-icons) · MIT
